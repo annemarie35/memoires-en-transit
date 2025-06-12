@@ -16,8 +16,8 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gray-100">
+      <div className="max-w-6xl mx-auto p-8">
         <h1 className="text-3xl font-bold mb-6 text-gray-800">Carte des Souvenirs</h1>
         <Map markers={markers} zoom={6} />
       </div>
