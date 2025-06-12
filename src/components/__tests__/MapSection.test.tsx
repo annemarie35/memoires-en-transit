@@ -1,16 +1,32 @@
 import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MapSection } from '../MapSection';
+import type { MapType } from '../MapTypeSelector';
 
 // Mock the Map component
 vi.mock('../Map', () => ({
-  Map: ({ markers }: { markers: Array<{ title: string }> }) => (
-    <div data-testid="map">
+  Map: ({ markers, mapStyle }: { markers: Array<{ title: string }>, mapStyle: string }) => (
+    <div data-testid="map" data-map-style={mapStyle}>
       {markers.map((marker, index) => (
         <div key={index} data-testid="marker">{marker.title}</div>
       ))}
     </div>
+  )
+}));
+
+// Mock the MapTypeSelector component
+vi.mock('../MapTypeSelector', () => ({
+  MapTypeSelector: ({ currentType, onTypeChange }: { currentType: MapType, onTypeChange: (type: MapType) => void }) => (
+    <select
+      data-testid="map-type-selector"
+      value={currentType}
+      onChange={(e) => onTypeChange(e.target.value as MapType)}
+    >
+      <option value="streets">Rues</option>
+      <option value="satellite">Satellite</option>
+      <option value="terrain">Terrain</option>
+    </select>
   )
 }));
 
@@ -40,8 +56,36 @@ describe('MapSection Component', () => {
     expect(screen.getByText('Lyon')).toBeInTheDocument();
   });
 
-  it('passes zoom and mapStyle props to Map component', () => {
-    render(<MapSection markers={markers} zoom={8} mapStyle="satellite" />);
-    expect(screen.getByTestId('map')).toBeInTheDocument();
+  it('renders the MapTypeSelector with default streets style', () => {
+    render(<MapSection markers={markers} />);
+    const selector = screen.getByTestId('map-type-selector');
+    expect(selector).toBeInTheDocument();
+    expect(selector).toHaveValue('streets');
+  });
+
+  it('updates map style when selector changes', () => {
+    render(<MapSection markers={markers} />);
+    const selector = screen.getByTestId('map-type-selector');
+    const map = screen.getByTestId('map');
+    
+    // Initial state
+    expect(map.getAttribute('data-map-style')).toBe('streets');
+    
+    // Change to satellite
+    fireEvent.change(selector, { target: { value: 'satellite' } });
+    expect(map.getAttribute('data-map-style')).toBe('satellite');
+    
+    // Change to terrain
+    fireEvent.change(selector, { target: { value: 'terrain' } });
+    expect(map.getAttribute('data-map-style')).toBe('terrain');
+  });
+
+  it('respects initialMapStyle prop', () => {
+    render(<MapSection markers={markers} initialMapStyle="satellite" />);
+    const selector = screen.getByTestId('map-type-selector');
+    const map = screen.getByTestId('map');
+    
+    expect(selector).toHaveValue('satellite');
+    expect(map.getAttribute('data-map-style')).toBe('satellite');
   });
 }); 
