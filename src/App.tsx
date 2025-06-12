@@ -1,12 +1,28 @@
-import './App.css'
+import React from 'react';
+import { Map } from './components/Map';
 
 function App() {
+  const markers = [
+    {
+      position: [48.8566, 2.3522] as [number, number],
+      title: 'Paris',
+      description: 'La ville lumière'
+    },
+    {
+      position: [45.7640, 4.8357] as [number, number],
+      title: 'Lyon',
+      description: 'La capitale de la gastronomie'
+    }
+  ];
+
   return (
-    <>
-      <div>
+    <div className="min-h-screen bg-gray-100 p-8">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6 text-gray-800">Carte des Souvenirs</h1>
+        <Map markers={markers} zoom={6} />
       </div>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
