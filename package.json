@@ -10,7 +10,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
-    "format": "prettier --write 'src/**/*.{ts,tsx,css,md,json}'"
+    "format": "prettier --write 'src/**/*.{ts,tsx,css,md,json}'",
+    "format:check": "prettier --check 'src/**/*.{ts,tsx,css,md,json}'"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.18",
