@@ -4,7 +4,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MapSection } from '../MapSection';
 import type { MapType } from '../MapTypeSelector';
 
-// Mock the Map component
 vi.mock('../Map', () => ({
   Map: ({ markers, mapStyle }: { markers: Array<{ title: string }>, mapStyle: string }) => (
     <div data-testid="map" data-map-style={mapStyle}>
@@ -15,7 +14,6 @@ vi.mock('../Map', () => ({
   )
 }));
 
-// Mock the MapTypeSelector component
 vi.mock('../MapTypeSelector', () => ({
   MapTypeSelector: ({ currentType, onTypeChange }: { currentType: MapType, onTypeChange: (type: MapType) => void }) => (
     <select

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Map } from './Map';
-import type { MapStyle } from './Map';
 import { MapTypeSelector } from './MapTypeSelector';
 import type { MapType } from './MapTypeSelector';
 
@@ -23,7 +22,7 @@ export const MapSection: React.FC<MapSectionProps> = ({
 
   return (
     <section className="w-full">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Carte des Souvenirs</h1>
+      <h1 className="text-ml font-bold mb-6 text-gray-800">Carte des Souvenirs</h1>
       <div className="relative">
         <MapTypeSelector currentType={mapStyle} onTypeChange={setMapStyle} />
         <Map markers={markers} zoom={zoom} mapStyle={mapStyle} />
