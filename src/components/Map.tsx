@@ -14,6 +14,23 @@ const icon = L.icon({
   shadowSize: [41, 41]
 });
 
+export type MapStyle = 'streets' | 'satellite' | 'terrain';
+
+const mapStyles = {
+  streets: {
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  },
+  satellite: {
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+  },
+  terrain: {
+    url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
+  }
+};
+
 interface MapProps {
   center?: [number, number];
   zoom?: number;
@@ -22,23 +39,28 @@ interface MapProps {
     title: string;
     description?: string;
   }>;
+  mapStyle?: MapStyle;
 }
 
 export const Map: React.FC<MapProps> = ({
   center = [48.8566, 2.3522],
   zoom = 13,
-  markers = []
+  markers = [],
+  mapStyle = 'streets'
 }) => {
+  const { url, attribution } = mapStyles[mapStyle];
+
   return (
     <div style={{ height: '500px', width: '100%' }}>
       <MapContainer 
         center={center} 
         zoom={zoom} 
         style={{ height: '100%', width: '100%' }}
+        scrollWheelZoom={true}
       >
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url={url}
+          attribution={attribution}
         />
         {markers.map((marker, index) => (
           <Marker 
