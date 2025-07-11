@@ -2,9 +2,17 @@
 
 Le projet de cartographier des mémoires éparses et multiples autour de l'immigration portugaise. Qu'ont ces lieux à nous dire ?
 
-# Installation
+## Stack technique
+Ce projet a fait l'object d'un premier test avec un [front en react](https://github.com/asso-memoire-vive/memoires-en-transit) et une [api en python](https://github.com/annemarie35/memoires-en-transit-api).
+Ces projets n'ont pas été maintenu, ceci est une nouvelle occasion en testant cursor et d'autres outils IA.
 
 ## Stack technique
+- Node
+- React Next
+- Vite
+- Vitest
+
+# Installation
 
 ## Prérequis
 
