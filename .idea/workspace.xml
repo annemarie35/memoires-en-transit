@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="65e2106f-4469-402d-9895-0d73bb34c1fe" name="Changes" comment="add a readme" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2yPQavSldgZSAVXFJ26wLimGVu4" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Vitest.Button.renders children correctly.executor": "Run",
+    "Vitest.Map Component.executor": "Run",
+    "last_opened_file_path": "/Users/anne-marieesteves/Developer/0 - TRAINING/github-repositories/memories",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "nx.console.mcp.server.install.notification.hide": "true",
+    "prettierjs.PrettierConfiguration.Package": "/Users/anne-marieesteves/Developer/0 - TRAINING/github-repositories/memories/node_modules/prettier",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "/Users/anne-marieesteves/Developer/MV2-ORGA-GITHUB-FOLDER/memories/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Vitest.Map Component">
+    <configuration name="Button.renders children correctly" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/components/__tests__/Button.test.tsx" />
+      <test-names>
+        <test-name value="Button" />
+        <test-name value="renders children correctly" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Map Component" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/components/__tests__/Map.test.tsx" />
+      <test-names>
+        <test-name value="Map Component" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Vitest.Map Component" />
+        <item itemvalue="Vitest.Button.renders children correctly" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-WS-251.26094.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="65e2106f-4469-402d-9895-0d73bb34c1fe" name="Changes" comment="" />
+      <created>1749733795427</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749733795427</updated>
+      <workItem from="1749733797249" duration="7856000" />
+      <workItem from="1749796345670" duration="601000" />
+      <workItem from="1749830228942" duration="1144000" />
+      <workItem from="1749911836890" duration="598000" />
+      <workItem from="1750232788557" duration="335000" />
+      <workItem from="1750410603064" duration="599000" />
+      <workItem from="1750662477758" duration="1805000" />
+      <workItem from="1752225170658" duration="303000" />
+      <workItem from="1752226420247" duration="54000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat: update App component">
+      <option name="closed" value="true" />
+      <created>1749736240021</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1749736240021</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix: simplify map implementation using React-Leaflet components">
+      <option name="closed" value="true" />
+      <created>1749738014940</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1749738014940</updated>
+    </task>
+    <task id="LOCAL-00003" summary="sr: clean some parts like useless comments, etc.">
+      <option name="closed" value="true" />
+      <created>1749739834647</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749739834648</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add a readme">
+      <option name="closed" value="true" />
+      <created>1752225471951</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1752225471951</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: update App component" />
+    <MESSAGE value="fix: simplify map implementation using React-Leaflet components" />
+    <MESSAGE value="sr: clean some parts like useless comments, etc." />
+    <MESSAGE value="add a readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a readme" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
