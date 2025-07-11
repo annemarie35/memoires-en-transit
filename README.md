@@ -1,6 +1,6 @@
 # MEMOIRES EN TRANSIT
 
-Le projet de cartographier des mémoires éparses et multiples. Qu'ont ces lieux à nous dire ?
+Le projet de cartographier des mémoires éparses et multiples autour de l'immigration portugaise. Qu'ont ces lieux à nous dire ?
 
 # Installation
 
