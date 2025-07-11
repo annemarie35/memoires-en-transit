@@ -13,20 +13,20 @@ interface MapSectionProps {
   initialMapStyle?: MapType;
 }
 
-export const MapSection: React.FC<MapSectionProps> = ({ 
+export const MapSection: React.FC<MapSectionProps> = ({
   markers,
   zoom = 6,
-  initialMapStyle = 'streets'
+  initialMapStyle = 'streets',
 }) => {
   const [mapStyle, setMapStyle] = useState<MapType>(initialMapStyle);
 
   return (
-    <section className="w-full">
-      <h1 className="text-ml font-bold mb-6 text-gray-800">Carte des Souvenirs</h1>
-      <div className="relative">
+    <section className='w-full'>
+      <h1 className='text-ml font-bold mb-6 text-gray-800'>Carte des Souvenirs</h1>
+      <div className='relative'>
         <MapTypeSelector currentType={mapStyle} onTypeChange={setMapStyle} />
         <Map markers={markers} zoom={zoom} mapStyle={mapStyle} />
       </div>
     </section>
   );
-}; 
+};

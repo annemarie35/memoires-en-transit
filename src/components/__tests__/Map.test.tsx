@@ -5,24 +5,34 @@ import { Map } from '../Map';
 import type { MapStyle } from '../Map';
 
 vi.mock('react-leaflet', () => ({
-  MapContainer: ({ children, scrollWheelZoom }: { children: React.ReactNode, scrollWheelZoom: boolean }) => (
-    <div data-testid="map-container" data-scroll-wheel-zoom={scrollWheelZoom}>{children}</div>
+  MapContainer: ({
+    children,
+    scrollWheelZoom,
+  }: {
+    children: React.ReactNode;
+    scrollWheelZoom: boolean;
+  }) => (
+    <div data-testid='map-container' data-scroll-wheel-zoom={scrollWheelZoom}>
+      {children}
+    </div>
   ),
-  TileLayer: ({ url, attribution }: { url: string, attribution: string }) => (
-    <div data-testid="tile-layer" data-url={url} data-attribution={attribution}>TileLayer</div>
+  TileLayer: ({ url, attribution }: { url: string; attribution: string }) => (
+    <div data-testid='tile-layer' data-url={url} data-attribution={attribution}>
+      TileLayer
+    </div>
   ),
   Marker: ({ children }: { children: React.ReactNode }) => (
-    <div data-testid="map-marker">{children}</div>
+    <div data-testid='map-marker'>{children}</div>
   ),
   Popup: ({ children }: { children: React.ReactNode }) => (
-    <div data-testid="map-popup">{children}</div>
+    <div data-testid='map-popup'>{children}</div>
   ),
 }));
 
 vi.mock('leaflet', () => ({
   default: {
-    icon: () => ({})
-  }
+    icon: () => ({}),
+  },
 }));
 
 describe('Map Component', () => {
@@ -38,8 +48,8 @@ describe('Map Component', () => {
       {
         position: [48.8566, 2.3522] as [number, number],
         title: 'Paris',
-        description: 'City of Light'
-      }
+        description: 'City of Light',
+      },
     ];
 
     render(<Map markers={markers} />);
@@ -53,13 +63,13 @@ describe('Map Component', () => {
       {
         position: [48.8566, 2.3522] as [number, number],
         title: 'Paris',
-        description: 'City of Light'
+        description: 'City of Light',
       },
       {
-        position: [45.7640, 4.8357] as [number, number],
+        position: [45.764, 4.8357] as [number, number],
         title: 'Lyon',
-        description: 'Gastronomy Capital'
-      }
+        description: 'Gastronomy Capital',
+      },
     ];
 
     render(<Map markers={markers} />);
@@ -78,14 +88,14 @@ describe('Map Component', () => {
   describe('Map Styles', () => {
     const mapStyles: { [key in MapStyle]: { url: string } } = {
       streets: {
-        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       },
       satellite: {
-        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       },
       terrain: {
-        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'
-      }
+        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+      },
     };
 
     it('uses streets style by default', () => {
@@ -103,4 +113,4 @@ describe('Map Component', () => {
       }
     );
   });
-}); 
+});

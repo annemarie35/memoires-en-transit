@@ -11,7 +11,7 @@ describe('Button', () => {
   it('calls onClick handler when clicked', () => {
     const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click me</Button>);
-    
+
     fireEvent.click(screen.getByTestId('button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
@@ -23,13 +23,13 @@ describe('Button', () => {
   });
 
   it('applies secondary variant styles when specified', () => {
-    render(<Button variant="secondary">Click me</Button>);
+    render(<Button variant='secondary'>Click me</Button>);
     const button = screen.getByTestId('button');
     expect(button.className).toContain('bg-gray-50');
   });
 
   it('applies correct size styles', () => {
-    render(<Button size="large">Click me</Button>);
+    render(<Button size='large'>Click me</Button>);
     const button = screen.getByTestId('button');
     expect(button.className).toContain('text-lg');
   });
@@ -38,4 +38,4 @@ describe('Button', () => {
     render(<Button disabled>Click me</Button>);
     expect(screen.getByTestId('button')).toBeDisabled();
   });
-}); 
+});
