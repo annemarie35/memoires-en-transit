@@ -11,8 +11,8 @@ export function csvToJson(filePath: string) {
   });
 }
 
-export async function getPositionFromCity(city: string, country: string): Promise<[number, number] | undefined> {
-  const query = encodeURIComponent(`${city}, ${country}`);
+export async function getPositionFromCity(cityAndCountry: string): Promise<[number, number] | undefined> {
+  const query = encodeURIComponent(cityAndCountry);
   const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1`;
 
   const response = await fetch(url, {

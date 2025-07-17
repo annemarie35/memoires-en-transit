@@ -19,7 +19,7 @@ function csvToJson(filePath: string) {
 
 describe('csv-to-json-script', () => {
   it('transforme temoignages.csv en JSON correctement', () => {
-    const csvPath = path.resolve(__dirname, 'temoignages.csv');
+    const csvPath = path.resolve(__dirname, 'raw-data-test.csv');
     const json = csvToJson(csvPath);
     expect(Array.isArray(json)).toBe(true);
     expect(json.length).toBeGreaterThan(0);
