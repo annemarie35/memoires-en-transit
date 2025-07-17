@@ -11,7 +11,8 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "format": "prettier --write 'src/**/*.{ts,tsx,css,md,json}'",
-    "format:check": "prettier --check 'src/**/*.{ts,tsx,css,md,json}'"
+    "format:check": "prettier --check 'src/**/*.{ts,tsx,css,md,json}'",
+    "csv-to-json": "ts-node src/helpers/csv-to-json-script.ts"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.18",
