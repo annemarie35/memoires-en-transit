@@ -14,6 +14,14 @@ Ces projets n'ont pas été maintenu, ceci est une nouvelle occasion en testant 
 
 # Installation
 
+
+### redis
+- `brew install redis`
+- `brew services start redis`
+- `brew services stop redis`
+- `pkill redis-server`
+
+// TODO finir readme avec partie api et autre
 ## Prérequis
 
 - https://www.memoria-viva.fr/category/les-projets/les-deserteurs-des-guerres-coloniales-portugaises-1961-1975/

@@ -1,5 +1,12 @@
 import Hapi from '@hapi/hapi';
 import { searchLocation } from "./locations";
+import { createClient } from 'redis';
+
+const redisClient = createClient();
+redisClient.connect();
+
+const GEOCODING_TTL = 7 * 24 * 60 * 60; // 7 jours
+//
 
 async function startServer() {
   const server = Hapi.server({
@@ -16,14 +23,24 @@ async function startServer() {
     path: '/locations',
     handler: async (request, h) => {
       const { q = '', limit = '1', format = 'json' } = request.query;
-      console.log('q', q)
-
+      const cacheKey = `locations:${q}:${limit}`;
+      // 1. Cherche dans le cache Redis
+      const cached = await redisClient.get(cacheKey);
+      if (cached) {
+        const results = JSON.parse(cached);
+        if (format === 'json') {
+          return results;
+        } else {
+          return h.response(results.map((loc: any) => loc.display_name).join('\n')).type('text/plain');
+        }
+      }
+      // 2. Sinon, appelle l'API et met en cache
       const results = await searchLocation(q, limit);
-      console.log('results', results)
+      await redisClient.setEx(cacheKey, GEOCODING_TTL, JSON.stringify(results));
       if (format === 'json') {
         return results;
       } else {
-        return h.response(results.map(loc => loc.display_name).join('\n')).type('text/plain');
+        return h.response(results.map((loc: any) => loc.display_name).join('\n')).type('text/plain');
       }
     },
   });
