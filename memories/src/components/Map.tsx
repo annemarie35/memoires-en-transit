@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import type { Testimony } from '../application/get-markers';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -39,7 +40,7 @@ interface MapProps {
   markers?: Array<{
     position: [number, number];
     title: string;
-    description?: string;
+    testimonies: Testimony[];
   }>;
   mapStyle?: MapStyle;
 }
@@ -52,6 +53,23 @@ export const Map: React.FC<MapProps> = ({
 }) => {
   const { url, attribution } = mapStyles[mapStyle];
 
+  // Pour chaque popup, on garde l'index du témoignage affiché
+  const [popupIndexes, setPopupIndexes] = useState<{ [key: number]: number }>({});
+
+  const handlePrev = (markerIdx: number, testimoniesLength: number) => {
+    setPopupIndexes((prev) => ({
+      ...prev,
+      [markerIdx]: prev[markerIdx] > 0 ? prev[markerIdx] - 1 : testimoniesLength - 1,
+    }));
+  };
+
+  const handleNext = (markerIdx: number, testimoniesLength: number) => {
+    setPopupIndexes((prev) => ({
+      ...prev,
+      [markerIdx]: prev[markerIdx] < testimoniesLength - 1 ? prev[markerIdx] + 1 : 0,
+    }));
+  };
+
   return (
     <div style={{ height: '1000px', width: '100%' }}>
       <MapContainer
@@ -61,14 +79,53 @@ export const Map: React.FC<MapProps> = ({
         scrollWheelZoom={true}
       >
         <TileLayer url={url} attribution={attribution} />
-        {markers.map((marker, index) => (
-          <Marker key={index} position={marker.position} icon={icon}>
-            <Popup>
-              <h3 className='font-bold'>{marker.title}</h3>
-              {marker.description && <p>{marker.description}</p>}
-            </Popup>
-          </Marker>
-        ))}
+        {markers.map((marker, index) => {
+          const testimonies = marker.testimonies || [];
+          const currentIdx = popupIndexes[index] || 0;
+          const testimony = testimonies[currentIdx];
+          return (
+            <Marker key={index} position={marker.position} icon={icon}>
+              <Popup>
+                <h3 className='font-bold'>{marker.title}</h3>
+                <div className='flex items-center'>
+                  {testimonies.length > 1 && (
+                    <button
+                      aria-label='Précédent'
+                      onClick={() => handlePrev(index, testimonies.length)}
+                      style={{ marginRight: 8 }}
+                    >
+                      ◀️
+                    </button>
+                  )}
+                  <div style={{ flex: 1 }}>
+                    <div className='text-gray-800 whitespace-pre-line'>
+                      {testimony.text}
+                    </div>
+                    <div className='text-xs text-gray-500 mt-1'>
+                      {testimony.genre && <span>{testimony.genre}</span>}
+                      {testimony.genre && testimony.date && ' · '}
+                      {testimony.date && <span>{testimony.date}</span>}
+                    </div>
+                    {testimonies.length > 1 && (
+                      <div className='text-xs text-gray-500 mt-2 text-center'>
+                        Témoignage {currentIdx + 1} / {testimonies.length}
+                      </div>
+                    )}
+                  </div>
+                  {testimonies.length > 1 && (
+                    <button
+                      aria-label='Suivant'
+                      onClick={() => handleNext(index, testimonies.length)}
+                      style={{ marginLeft: 8 }}
+                    >
+                      ▶️
+                    </button>
+                  )}
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
     </div>
   );

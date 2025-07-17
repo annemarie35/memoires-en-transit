@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { Map } from './Map';
 import { MapTypeSelector } from './MapTypeSelector';
 import type { MapType } from './MapTypeSelector';
+import type { Marker } from '../application/get-markers';
 
 interface MapSectionProps {
-  markers: Array<{
-    position: [number, number];
-    title: string;
-    description?: string;
-  }>;
+  markers: Marker[];
   zoom?: number;
   initialMapStyle?: MapType;
 }

@@ -2,10 +2,11 @@ import { MapSection } from './components/MapSection';
 import temoignages from '../data/temoignages.json';
 import { keyMap, renameKeysAuto } from './helpers/parse-data.ts';
 import { useEffect, useState } from 'react';
-import type { Marker } from 'leaflet';
-import { getMarkers } from './application/get-markers.ts';
+import type { Marker } from './application/get-markers.ts';
+import { getMarkersGrouped } from './application/get-markers.ts';
 
-const temoignagesClean = renameKeysAuto(temoignages, keyMap);
+const toto = renameKeysAuto(temoignages, keyMap);
+const temoignagesClean = toto.slice(0, 10);
 
 function App() {
   const [markers, setMarkers] = useState<Marker[]>([]);
@@ -14,7 +15,7 @@ function App() {
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
-    getMarkers(temoignagesClean).then((marker) => {
+    getMarkersGrouped(temoignagesClean).then((marker) => {
       if (isMounted) {
         setMarkers(marker);
         setLoading(false);
@@ -24,6 +25,8 @@ function App() {
       isMounted = false;
     };
   }, []);
+
+  console.log('markers', markers);
 
   return (
     <div className='min-h-screen bg-gray-100' data-testid='app-container'>
