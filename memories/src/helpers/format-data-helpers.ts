@@ -10,3 +10,20 @@ export function csvToJson(filePath: string) {
     trim: true,
   });
 }
+
+export async function getPositionFromCity(city: string, country: string): Promise<[number, number] | undefined> {
+  const query = encodeURIComponent(`${city}, ${country}`);
+  const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1`;
+
+  const response = await fetch(url, {
+    headers: { 'User-Agent': 'memoires-en-transit/1.0 (contact@example.com)' }
+  });
+  const data = await response.json();
+
+  if (data && data.length > 0) {
+    const lat = parseFloat(data[0].lat);
+    const lon = parseFloat(data[0].lon);
+    return [lat, lon];
+  }
+  return undefined;
+}
