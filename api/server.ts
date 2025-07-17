@@ -5,6 +5,10 @@ async function startServer() {
   const server = Hapi.server({
     port: 3000,
     host: 'localhost',
+    //TODO Fix Cors issue
+    routes: {
+      cors: true
+    }
   });
 
   server.route({
