@@ -86,41 +86,43 @@ export const Map: React.FC<MapProps> = ({
           return (
             <Marker key={index} position={marker.position} icon={icon}>
               <Popup>
-                <h3 className='font-bold'>{marker.title}</h3>
-                <div className='flex items-center'>
-                  {testimonies.length > 1 && (
-                    <button
-                      aria-label='Précédent'
-                      onClick={() => handlePrev(index, testimonies.length)}
-                      style={{ marginRight: 8 }}
-                    >
-                      ◀️
-                    </button>
-                  )}
-                  <div style={{ flex: 1 }}>
-                    <div className='text-gray-800 whitespace-pre-line'>
-                      {testimony.text}
-                    </div>
-                    <div className='text-xs text-gray-500 mt-1'>
-                      {testimony.genre && <span>{testimony.genre}</span>}
-                      {testimony.genre && testimony.date && ' · '}
-                      {testimony.date && <span>{testimony.date}</span>}
+                <div className="custom-popup-content">
+                  <h3 className='font-bold'>{marker.title}</h3>
+                  <div className='flex items-center'>
+                    {testimonies.length > 1 && (
+                      <button
+                        aria-label='Précédent'
+                        onClick={() => handlePrev(index, testimonies.length)}
+                        style={{ marginRight: 8 }}
+                      >
+                        ◀️
+                      </button>
+                    )}
+                    <div style={{ flex: 1 }}>
+                      <div className='text-gray-800 whitespace-pre-line text-lg mb-2'>
+                        {testimony.text}
+                      </div>
+                      <div className='text-base text-gray-500 mt-1 mb-2'>
+                        {testimony.genre && <span>{testimony.genre}</span>}
+                        {testimony.genre && testimony.date && ' · '}
+                        {testimony.date && <span>{testimony.date}</span>}
+                      </div>
+                      {testimonies.length > 1 && (
+                        <div className='text-base text-gray-500 mt-2 text-center'>
+                          Témoignage {currentIdx + 1} / {testimonies.length}
+                        </div>
+                      )}
                     </div>
                     {testimonies.length > 1 && (
-                      <div className='text-xs text-gray-500 mt-2 text-center'>
-                        Témoignage {currentIdx + 1} / {testimonies.length}
-                      </div>
+                      <button
+                        aria-label='Suivant'
+                        onClick={() => handleNext(index, testimonies.length)}
+                        style={{ marginLeft: 8 }}
+                      >
+                        ▶️
+                      </button>
                     )}
                   </div>
-                  {testimonies.length > 1 && (
-                    <button
-                      aria-label='Suivant'
-                      onClick={() => handleNext(index, testimonies.length)}
-                      style={{ marginLeft: 8 }}
-                    >
-                      ▶️
-                    </button>
-                  )}
                 </div>
               </Popup>
             </Marker>

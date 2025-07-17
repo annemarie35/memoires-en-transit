@@ -40,3 +40,25 @@
 .read-the-docs {
   color: #888;
 }
+
+.leaflet-popup-content-wrapper {
+  width: 50vw !important;
+  max-width: 90vw !important;
+  min-width: 250px;
+  box-sizing: border-box;
+}
+
+.leaflet-popup-content,
+.custom-popup-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  box-sizing: border-box;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.custom-popup-content {
+  overflow-x: auto;
+}
