@@ -1,4 +1,5 @@
 import Hapi from '@hapi/hapi';
+import { searchLocation } from "./locations";
 
 async function startServer() {
   const server = Hapi.server({
@@ -9,12 +10,17 @@ async function startServer() {
   server.route({
     method: 'GET',
     path: '/locations',
-    handler: () => {
-      return [
-        { city: 'Paris', lat: 48.8566, lng: 2.3522 },
-        { city: 'Lyon', lat: 45.764, lng: 4.8357 },
-        { city: 'Marseille', lat: 43.2965, lng: 5.3698 },
-      ];
+    handler: async (request, h) => {
+      const { q = '', limit = '1', format = 'json' } = request.query;
+      console.log('q', q)
+
+      const results = await searchLocation(q, limit);
+      console.log('results', results)
+      if (format === 'json') {
+        return results;
+      } else {
+        return h.response(results.map(loc => loc.display_name).join('\n')).type('text/plain');
+      }
     },
   });
 
