@@ -2,6 +2,7 @@ import Hapi from '@hapi/hapi';
 import { searchLocation } from "./locations";
 import { createClient } from 'redis';
 import * as fs from 'fs/promises';
+import {keyMap, renameKeysAuto} from "./helpers/parse-data";
 
 const redisClient = createClient();
 redisClient.connect();
@@ -49,7 +50,8 @@ export async function createServer() {
       try {
         const data = await fs.readFile('data/temoignages.json', 'utf-8');
         const testimonies = JSON.parse(data);
-        return testimonies;
+        const withKeysTestimonies = renameKeysAuto(testimonies, keyMap);
+        return withKeysTestimonies;
       } catch (err) {
         console.error('Erreur lecture temoignages.json:', err);
         return h.response({ error: 'Impossible de lire les témoignages' }).code(500);
