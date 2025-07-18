@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import fs from 'fs';
 import path from 'path';
-import { keyMap, renameKeysAuto, getPositionFromCity } from '../parse-data';
+import { keyMap, renameKeysAuto, getPositionFromCity, enrichTestimoniesWithLocation } from '../parse-data';
 
 describe('renameKeysAuto', () => {
   const jsonPath = path.resolve(__dirname, 'raw-data-test.json');
@@ -18,11 +18,10 @@ describe('renameKeysAuto', () => {
   );
 });
 
-const mockParisResult = [{"place_id":88066702,"licence":"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright","osm_type":"relation","osm_id":71525,"lat":"48.8534951","lon":"2.3483915","class":"boundary","type":"administrative","place_rank":12,"importance":0.8845663630228834,"addresstype":"city","name":"Paris","display_name":"Paris, Île-de-France, France métropolitaine, France","boundingbox":["48.8155755","48.9021560","2.2241220","2.4697602"]}];
-
-const mockEmptyResult: any[] = [];
-
 describe('getPositionFromCity', () => {
+  const mockParisResult = [{"place_id":88066702,"licence":"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright","osm_type":"relation","osm_id":71525,"lat":"48.8534951","lon":"2.3483915","class":"boundary","type":"administrative","place_rank":12,"importance":0.8845663630228834,"addresstype":"city","name":"Paris","display_name":"Paris, Île-de-France, France métropolitaine, France","boundingbox":["48.8155755","48.9021560","2.2241220","2.4697602"]}];
+  const mockEmptyResult: any[] = [];
+
   beforeEach(() => {
     vi.resetAllMocks();
   });
@@ -53,5 +52,22 @@ describe('getPositionFromCity', () => {
 
   afterEach(() => {
     vi.restoreAllMocks();
+  });
+});
+
+describe('enrichTestimoniesWithLocation', () => {
+  const mockLocation = [48.8566, 2.3522];
+  const mockGetPositionFromCity = vi.fn().mockResolvedValue(mockLocation);
+
+  it('should add testimonyLocation to each testimony', async () => {
+    const testimonies = [
+      { testimonyCity: 'Paris', foo: 'bar' },
+      { testimonyCity: 'Lyon', foo: 'baz' },
+    ];
+    const enriched = await enrichTestimoniesWithLocation(testimonies, mockGetPositionFromCity);
+    for (const t of enriched) {
+      expect(t.testimonyLocation).toEqual(mockLocation);
+    }
+    expect(mockGetPositionFromCity).toHaveBeenCalledTimes(testimonies.length);
   });
 });

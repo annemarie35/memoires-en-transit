@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import testimonies from '../data/temoignages-clean.json';
 
 export const keyMap: Record<string, string> = {
   'Carimbo de data/hora': 'date',
@@ -50,7 +51,26 @@ export async function getPositionFromCity(city: string): Promise<Location|null> 
   return null;
 }
 
+export async function enrichTestimoniesWithLocation<
+  T extends { testimonyCity?: string }
+>(
+  testimonies: T[],
+  getPositionFromCity: GetPositionFromCity
+): Promise<(T & { testimonyLocation: Location | null })[]> {
+
+  const enriched = await Promise.all(
+    testimonies.map(async (t) => {
+      const location = t.testimonyCity
+        ? await getPositionFromCity(t.testimonyCity)
+        : null;
+      return { ...t, testimonyLocation: location };
+    })
+  );
+  return enriched;
+}
+
 type Location = [latitude, longitude];
 type latitude = number
 type longitude = number
+type GetPositionFromCity = (city: string) => Promise<Location | null>;
 
