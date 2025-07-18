@@ -1,12 +1,10 @@
 import { MapSection } from './components/MapSection';
-import temoignages from '../data/temoignages.json';
-import { keyMap, renameKeysAuto } from './helpers/parse-data.ts';
 import { useEffect, useState } from 'react';
 import type { Marker } from './application/get-markers.ts';
 import { getMarkersGrouped } from './application/get-markers.ts';
+import { getTestimonies } from './infrastructure/get-testimonies.ts';
 
-const toto = renameKeysAuto(temoignages, keyMap);
-const temoignagesClean = toto.slice(0, 10);
+const testimonies = await getTestimonies()
 
 function App() {
   const [markers, setMarkers] = useState<Marker[]>([]);
@@ -15,7 +13,7 @@ function App() {
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
-    getMarkersGrouped(temoignagesClean).then((marker) => {
+    getMarkersGrouped(testimonies).then((marker) => {
       if (isMounted) {
         setMarkers(marker);
         setLoading(false);
@@ -40,23 +38,6 @@ function App() {
         ) : (
           <MapSection markers={markers} />
         )}
-        {/*<section className='mt-12'>*/}
-        {/*  <h2 className='text-xl font-bold mb-4'>Témoignages</h2>*/}
-        {/*  <ul className='space-y-6'>*/}
-        {/*    {temoignagesClean.map((t, idx) => (*/}
-        {/*      <li key={idx} className='bg-white rounded-lg shadow p-4'>*/}
-        {/*        <div className='text-sm text-gray-500 mb-1'>*/}
-        {/*          <span>{t.testimonyCity || 'Ville inconnue'}</span>*/}
-        {/*          {' · '}*/}
-        {/*          <span>{t.date || 'Date inconnue'}</span>*/}
-        {/*          {' · '}*/}
-        {/*          <span>{t.genre || 'Genre inconnu'}</span>*/}
-        {/*        </div>*/}
-        {/*        <div className='text-gray-800 whitespace-pre-line'>{t.testimony}</div>*/}
-        {/*      </li>*/}
-        {/*    ))}*/}
-        {/*  </ul>*/}
-        {/*</section>*/}
       </div>
     </div>
   );

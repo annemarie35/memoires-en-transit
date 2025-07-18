@@ -1,5 +1,3 @@
-import { getPositionFromCity } from '../infrastructure/geocoding/get-positions.ts';
-
 export type Testimony = {
   text: string;
   genre?: string;
@@ -12,33 +10,6 @@ export type Marker = {
   testimonies: Testimony[];
 };
 
-export async function getMarkers(
-  temoignages: Array<{ testimonyCity?: string; birthPlace?: string; testimony?: string; [key: string]: any }>
-): Promise<Marker[]> {
-  const markers: Marker[] = [];
-  for (const temoignage of temoignages) {
-    const city = temoignage.testimonyCity || t.birthPlace;
-
-    if (!city) continue;
-    // TODO l'affichage commence avant la fin de la récupération de toutes les positions...
-    // On suppose France par défaut, sinon à adapter
-    const query = city.includes(',') ? city : `${city}, France`;
-    const pos = await getPositionFromCity(query);
-    if (pos) {
-      markers.push({
-        position: pos,
-        title: city,
-        testimonies: [{
-          text: temoignage.testimony || '',
-          genre: temoignage.genre,
-          date: temoignage.testimonyDate,
-        }],
-      });
-    }
-  }
-  return markers;
-}
-
 export async function getMarkersGrouped(
   temoignages: Array<{ testimonyCity?: string; testimony?: string; [key: string]: any }>
 ): Promise<Marker[]> {
@@ -47,8 +18,7 @@ export async function getMarkersGrouped(
   for (const temoignage of temoignages) {
     const city = temoignage.testimonyCity
     if (!city) continue;
-    const query = city.includes(',') ? city : `${city}, France`;
-    const pos = await getPositionFromCity(query);
+    const pos = temoignage.testimonyLocation;
     if (pos) {
       const key = pos.join(',');
       if (!positionMap[key]) {
