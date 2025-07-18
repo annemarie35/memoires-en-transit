@@ -1,18 +1,17 @@
 import Hapi from '@hapi/hapi';
 import { searchLocation } from "./locations";
 import { createClient } from 'redis';
+import * as fs from 'fs/promises';
 
 const redisClient = createClient();
 redisClient.connect();
 
 const GEOCODING_TTL = 7 * 24 * 60 * 60; // 7 jours
-//
 
-async function startServer() {
+export async function createServer() {
   const server = Hapi.server({
     port: 3000,
     host: 'localhost',
-    //TODO Fix Cors issue
     routes: {
       cors: true
     }
@@ -24,7 +23,6 @@ async function startServer() {
     handler: async (request, h) => {
       const { q = '', limit = '1', format = 'json' } = request.query;
       const cacheKey = `locations:${q}:${limit}`;
-      // 1. Cherche dans le cache Redis
       const cached = await redisClient.get(cacheKey);
       if (cached) {
         const results = JSON.parse(cached);
@@ -34,7 +32,6 @@ async function startServer() {
           return h.response(results.map((loc: any) => loc.display_name).join('\n')).type('text/plain');
         }
       }
-      // 2. Sinon, appelle l'API et met en cache
       const results = await searchLocation(q, limit);
       await redisClient.setEx(cacheKey, GEOCODING_TTL, JSON.stringify(results));
       if (format === 'json') {
@@ -45,9 +42,30 @@ async function startServer() {
     },
   });
 
+  server.route({
+    method: 'GET',
+    path: '/testimonies',
+    handler: async (request, h) => {
+      try {
+        const data = await fs.readFile('data/temoignages.json', 'utf-8');
+        const testimonies = JSON.parse(data);
+        return testimonies;
+      } catch (err) {
+        console.error('Erreur lecture temoignages.json:', err);
+        return h.response({ error: 'Impossible de lire les témoignages' }).code(500);
+      }
+    },
+  });
 
+  return server;
+}
+
+async function startServer() {
+  const server = await createServer();
   await server.start();
   console.log('Server running on %s', server.info.uri);
 }
 
-startServer(); 
+if (require.main === module) {
+  startServer();
+} 
