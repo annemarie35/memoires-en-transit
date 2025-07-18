@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 export const keyMap: Record<string, string> = {
   'Carimbo de data/hora': 'date',
   'Vous êtes ?': 'genre',
@@ -17,6 +19,7 @@ export function renameKeysAuto<T extends Record<string, string>>(
   data: T[],
   mapping: Record<string, string>
 ): Record<string, string>[] {
+  //TODO Refacto
   return data.map(obj => {
     const newObj: Record<string, string> = {};
     for (const key in obj) {
@@ -28,3 +31,26 @@ export function renameKeysAuto<T extends Record<string, string>>(
     return newObj;
   });
 }
+
+// TODO Move to another folder looks like a port
+export async function getPositionFromCity(city: string): Promise<Location|null> {
+  const url = `http://localhost:3000/locations?q=${encodeURIComponent(city)}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Erreur lors de l'appel à /locations : ${response.status}`);
+  }
+  const data = await response.json();
+  // TODO Enlever les éléments redondants avec l'appel api fait par le serveur
+
+  if (data && data.length > 0) {
+    const lat = parseFloat(data[0].lat);
+    const lon = parseFloat(data[0].lon);
+    return [lat, lon];
+  }
+  return null;
+}
+
+type Location = [latitude, longitude];
+type latitude = number
+type longitude = number
+
