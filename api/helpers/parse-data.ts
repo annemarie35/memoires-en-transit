@@ -16,20 +16,35 @@ export const keyMap: Record<string, string> = {
   "Votre témoignage": 'testimony',
 };
 
+export type TemoignagesClean = {
+  date: string;
+  genre: string;
+  birthPlace: string;
+  birthDate: string;
+  testimonyConcern: string;
+  testifyingFor: string;
+  testimonyCity: string;
+  testimonyDepartment: string;
+  testifyingForBithPlace: string;
+  testimonyDate: string;
+  testimonyTheme: string;
+  testimony: string;
+  testimonyLocation: Location | null; // exclu par Omit
+};
+
 export function renameKeysAuto<T extends Record<string, string>>(
-  data: T[],
+  rawTestimonies: T[],
   mapping: Record<string, string>
-): Record<string, string>[] {
-  //TODO Refacto
-  return data.map(obj => {
+): Omit<TemoignagesClean, 'testimonyLocation'>[] {
+  return rawTestimonies.map(testimony => {
     const newObj: Record<string, string> = {};
-    for (const key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+    for (const key in testimony) {
+      if (Object.prototype.hasOwnProperty.call(testimony, key)) {
         const newKey = mapping[key] || key;
-        newObj[newKey] = obj[key];
+        newObj[newKey] = testimony[key];
       }
     }
-    return newObj;
+    return newObj as Omit<TemoignagesClean, 'testimonyLocation'>;
   });
 }
 
