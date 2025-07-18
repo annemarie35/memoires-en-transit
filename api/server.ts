@@ -2,7 +2,6 @@ import Hapi from '@hapi/hapi';
 import { searchLocation } from "./locations";
 import { createClient } from 'redis';
 import * as fs from 'fs/promises';
-import {keyMap, renameKeysAuto} from "./helpers/parse-data";
 
 const redisClient = createClient();
 redisClient.connect();
@@ -47,13 +46,13 @@ export async function createServer() {
     method: 'GET',
     path: '/testimonies',
     handler: async (request, h) => {
+      const DATA_PATH= 'data/temoignages-clean.json'
       try {
-        const data = await fs.readFile('data/temoignages.json', 'utf-8');
+        const data = await fs.readFile(DATA_PATH, 'utf-8');
         const testimonies = JSON.parse(data);
-        const withKeysTestimonies = renameKeysAuto(testimonies, keyMap);
-        return withKeysTestimonies;
+        return testimonies
       } catch (err) {
-        console.error('Erreur lecture temoignages.json:', err);
+        console.error('Erreur de lecture des temoignages:', err);
         return h.response({ error: 'Impossible de lire les témoignages' }).code(500);
       }
     },
