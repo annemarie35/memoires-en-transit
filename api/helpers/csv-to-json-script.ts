@@ -1,8 +1,10 @@
+// @ts-ignore
 import fs from 'fs';
-import path from 'path';
 import { fileURLToPath } from 'url';
 import { csvToJson } from './format-data-helpers';
-
+// @ts-ignore
+import path from "path";
+// @ts-ignore
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

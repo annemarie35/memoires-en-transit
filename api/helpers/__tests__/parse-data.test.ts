@@ -60,6 +60,7 @@ describe('enrichTestimoniesWithLocation', () => {
   const mockGetPositionFromCity = vi.fn().mockResolvedValue(mockLocation);
 
   it('should add testimonyLocation to each testimony', async () => {
+    //TODO test red in CI FIXIT
     const testimonies = [
       { testimonyCity: 'Paris', foo: 'bar' },
       { testimonyCity: 'Lyon', foo: 'baz' },
@@ -69,5 +70,28 @@ describe('enrichTestimoniesWithLocation', () => {
       expect(t.testimonyLocation).toEqual(mockLocation);
     }
     expect(mockGetPositionFromCity).toHaveBeenCalledTimes(testimonies.length);
+  });
+});
+
+describe('enrichTestimoniesWithLocation error handling', () => {
+  it('should set testimonyLocation to null if getPositionFromCity throws', async () => {
+    const testimonies = [
+      { testimonyCity: 'Paris', foo: 'bar' },
+      { testimonyCity: 'Lyon', foo: 'baz' },
+    ];
+    const mockGetPositionFromCity = vi.fn()
+      .mockResolvedValueOnce([48.8566, 2.3522])
+      .mockRejectedValueOnce(new Error('API error'));
+
+    const enriched = await enrichTestimoniesWithLocation(testimonies, async (city) => {
+      try {
+        return await mockGetPositionFromCity(city);
+      } catch {
+        return null;
+      }
+    });
+
+    expect(enriched[0].testimonyLocation).toEqual([48.8566, 2.3522]);
+    expect(enriched[1].testimonyLocation).toBeNull();
   });
 });

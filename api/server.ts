@@ -46,7 +46,7 @@ export async function createServer() {
     method: 'GET',
     path: '/testimonies',
     handler: async (request, h) => {
-      const DATA_PATH= 'data/temoignages-clean.json'
+      const DATA_PATH= 'data/temoignages-enriched.json'
       try {
         const data = await fs.readFile(DATA_PATH, 'utf-8');
         const testimonies = JSON.parse(data);
