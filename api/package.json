@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ts-node server.ts",
     "dev": "nodemon --watch . --ext ts --exec ts-node server.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "clean-data": "npx ts-node helpers/clean-data-script.ts"
   },
   "dependencies": {
     "@hapi/hapi": "^21.3.2",
