@@ -2,6 +2,7 @@ export type Testimony = {
   text: string;
   genre?: string;
   date?: string;
+  theme?: [string];
 };
 
 export type Marker = {
@@ -13,10 +14,13 @@ export type Marker = {
 export async function getMarkersGrouped(
   temoignages: Array<{ testimonyCity?: string; testimony?: string; [key: string]: any }>
 ): Promise<Marker[]> {
-  const positionMap: Record<string, { position: [number, number]; city: string; testimonies: Testimony[] }> = {};
+  const positionMap: Record<
+    string,
+    { position: [number, number]; city: string; testimonies: Testimony[] }
+  > = {};
 
   for (const temoignage of temoignages) {
-    const city = temoignage.testimonyCity
+    const city = temoignage.testimonyCity;
     if (!city) continue;
     const pos = temoignage.testimonyLocation;
     if (pos) {
@@ -28,6 +32,9 @@ export async function getMarkersGrouped(
         text: temoignage.testimony || '',
         genre: temoignage.genre,
         date: temoignage.testimonyDate,
+        theme: temoignage.testimonyTheme
+          ? temoignage.testimonyTheme.split(',')
+          : ['aucun thème fourni'],
       });
     }
   }
@@ -37,4 +44,4 @@ export async function getMarkersGrouped(
     title: `${city} (${testimonies.length})`,
     testimonies,
   }));
-} 
+}

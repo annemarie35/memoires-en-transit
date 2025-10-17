@@ -60,7 +60,9 @@ describe('Testimony component', () => {
   });
 
   it('hides navigation when only one testimony', () => {
-    const testimonies = [{ text: 'Unique', genre: 'F', date: '2024-01-01' }];
+    const testimonies = [
+      { text: 'Unique', genre: 'F', date: '2024-01-01', theme: ['theme 1', 'theme 2'] },
+    ];
 
     render(
       <Testimony
@@ -74,5 +76,25 @@ describe('Testimony component', () => {
 
     expect(screen.queryByRole('button', { name: 'Précédent' })).toBeNull();
     expect(screen.queryByRole('button', { name: 'Suivant' })).toBeNull();
+  });
+
+  it('renders themes list when provided', () => {
+    const testimonies = [
+      { text: 'Texte', genre: 'F', date: '2024-01-01', theme: ['emploi', 'papiers'] },
+    ];
+
+    render(
+      <Testimony
+        marker={{ ...baseMarker, testimonies }}
+        currentIdx={0}
+        testimonies={testimonies}
+        onPrev={vi.fn()}
+        onNext={vi.fn()}
+      />
+    );
+
+    expect(screen.getByText('Le témoignage porte sur les thèmes suivants :')).toBeInTheDocument();
+    expect(screen.getByText('emploi')).toBeInTheDocument();
+    expect(screen.getByText('papiers')).toBeInTheDocument();
   });
 });
