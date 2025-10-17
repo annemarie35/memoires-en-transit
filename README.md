@@ -12,8 +12,9 @@ Sources :
 - https://ecosexilios-cria.org/fr/
 
 ## Stack technique
+
 Ce projet a fait l'object d'un premier test avec un [front en react](https://github.com/asso-memoire-vive/memoires-en-transit) et une [api en python](https://github.com/annemarie35/memoires-en-transit-api).
-Ces projets n'ont pas été maintenu, ceci est une nouvelle occasion en testant cursor et d'autres outils IA.
+Ces projets n'ont pas été maintenus, ceci est une nouvelle occasion en testant cursor et d'autres outils IA avec :
 
 - Node
 - React Next
@@ -24,8 +25,8 @@ Ces projets n'ont pas été maintenu, ceci est une nouvelle occasion en testant 
 
 ### 1. Lancer le serveur API (Hapi)
 
-Prérequis 
-### Redis
+#### Prérequis 
+###### Redis
 Sur Mac Os
 - Installer Redis : `brew install redis`
 - Executer Redis : `brew services start redis`
@@ -54,9 +55,3 @@ npm run dev
 ```
 
 L'application React sera accessible sur [http://localhost:5173](http://localhost:5173) (ou le port affiché par Vite).
-
----
-
-
-
-
