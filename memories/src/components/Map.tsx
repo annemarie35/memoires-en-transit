@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import type { Testimony } from '../application/get-markers';
+import type { Testimony as TestimonyType } from '../application/get-markers';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { Testimony } from './Testimony';
 
 const icon = L.icon({
   iconUrl: '/images/marker-icon.png',
@@ -40,20 +41,21 @@ interface MapProps {
   markers?: Array<{
     position: [number, number];
     title: string;
-    testimonies: Testimony[];
+    testimonies: TestimonyType[];
   }>;
   mapStyle?: MapStyle;
 }
 
+const CENTER_MAP_POSITION: [number, number] = [48.8566, 2.3522];
+
 export const Map: React.FC<MapProps> = ({
-  center = [48.8566, 2.3522],
+  center = CENTER_MAP_POSITION,
   zoom = 13,
   markers = [],
   mapStyle = 'streets',
 }) => {
   const { url, attribution } = mapStyles[mapStyle];
 
-  // Pour chaque popup, on garde l'index du témoignage affiché
   const [popupIndexes, setPopupIndexes] = useState<{ [key: number]: number }>({});
 
   const handlePrev = (markerIdx: number, testimoniesLength: number) => {
@@ -71,7 +73,7 @@ export const Map: React.FC<MapProps> = ({
   };
 
   return (
-    <div style={{ height: '1000px', width: '100%' }}>
+    <div className='h-[1280px] w-full bg-green-300'>
       <MapContainer
         center={center}
         zoom={zoom}
@@ -82,48 +84,16 @@ export const Map: React.FC<MapProps> = ({
         {markers.map((marker, index) => {
           const testimonies = marker.testimonies || [];
           const currentIdx = popupIndexes[index] || 0;
-          const testimony = testimonies[currentIdx];
           return (
-            <Marker key={index} position={marker.position} icon={icon}>
+            <Marker key={index} position={[marker.position[0], marker.position[1]]} icon={icon}>
               <Popup>
-                <div className="custom-popup-content">
-                  <h3 className='font-bold'>{marker.title}</h3>
-                  <div className='flex items-center'>
-                    {testimonies.length > 1 && (
-                      <button
-                        aria-label='Précédent'
-                        onClick={() => handlePrev(index, testimonies.length)}
-                        style={{ marginRight: 8 }}
-                      >
-                        ◀️
-                      </button>
-                    )}
-                    <div style={{ flex: 1 }}>
-                      <div className='text-gray-800 whitespace-pre-line text-lg mb-2'>
-                        {testimony.text}
-                      </div>
-                      <div className='text-base text-gray-500 mt-1 mb-2'>
-                        {testimony.genre && <span>{testimony.genre}</span>}
-                        {testimony.genre && testimony.date && ' · '}
-                        {testimony.date && <span>{testimony.date}</span>}
-                      </div>
-                      {testimonies.length > 1 && (
-                        <div className='text-base text-gray-500 mt-2 text-center'>
-                          Témoignage {currentIdx + 1} / {testimonies.length}
-                        </div>
-                      )}
-                    </div>
-                    {testimonies.length > 1 && (
-                      <button
-                        aria-label='Suivant'
-                        onClick={() => handleNext(index, testimonies.length)}
-                        style={{ marginLeft: 8 }}
-                      >
-                        ▶️
-                      </button>
-                    )}
-                  </div>
-                </div>
+                <Testimony
+                  marker={marker}
+                  currentIdx={currentIdx}
+                  testimonies={testimonies}
+                  onPrev={() => handlePrev(index, testimonies.length)}
+                  onNext={() => handleNext(index, testimonies.length)}
+                />
               </Popup>
             </Marker>
           );

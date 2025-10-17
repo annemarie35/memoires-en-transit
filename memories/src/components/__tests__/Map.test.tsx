@@ -47,14 +47,14 @@ describe('Map Component', () => {
     const markers = [
       {
         position: [48.8566, 2.3522] as [number, number],
-        title: 'Paris',
-        description: 'City of Light',
+        title: 'Paris (1)',
+        testimonies: [{ text: 'City of Light', genre: 'F', date: '2024-01-01' }],
       },
     ];
 
     render(<Map markers={markers} />);
     expect(screen.getByTestId('map-marker')).toBeInTheDocument();
-    expect(screen.getByText('Paris')).toBeInTheDocument();
+    expect(screen.getByText('Paris (1)')).toBeInTheDocument();
     expect(screen.getByText('City of Light')).toBeInTheDocument();
   });
 
@@ -62,21 +62,21 @@ describe('Map Component', () => {
     const markers = [
       {
         position: [48.8566, 2.3522] as [number, number],
-        title: 'Paris',
-        description: 'City of Light',
+        title: 'Paris (1)',
+        testimonies: [{ text: 'City of Light' }],
       },
       {
         position: [45.764, 4.8357] as [number, number],
-        title: 'Lyon',
-        description: 'Gastronomy Capital',
+        title: 'Lyon (1)',
+        testimonies: [{ text: 'Gastronomy Capital' }],
       },
     ];
 
     render(<Map markers={markers} />);
     const markerElements = screen.getAllByTestId('map-marker');
     expect(markerElements).toHaveLength(2);
-    expect(screen.getByText('Paris')).toBeInTheDocument();
-    expect(screen.getByText('Lyon')).toBeInTheDocument();
+    expect(screen.getByText('Paris (1)')).toBeInTheDocument();
+    expect(screen.getByText('Lyon (1)')).toBeInTheDocument();
   });
 
   it('uses default center and zoom when not provided', () => {
