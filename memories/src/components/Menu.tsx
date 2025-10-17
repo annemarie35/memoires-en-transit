@@ -22,6 +22,13 @@ export const Menu: React.FC = () => {
       >
         Témoignages
       </NavLink>
+      <NavLink
+        to='/apropos'
+        className={({ isActive }) => base + (isActive ? active : '')}
+        data-testid='link-apropos'
+      >
+        À propos
+      </NavLink>
     </nav>
   );
 };

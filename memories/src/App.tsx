@@ -49,6 +49,7 @@ function App() {
   }, []);
 
   const getErrorIcon = () => {
+    // TODO Uniformize with one component for map and testimonies page
     if (errorType === 'testimonies') {
       return <ExclamationTriangleIcon className='h-5 w-5 text-orange-500' />;
     }
