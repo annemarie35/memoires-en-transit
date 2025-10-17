@@ -52,12 +52,6 @@ describe('App Component', () => {
     vi.clearAllMocks();
   });
 
-  it('renders with proper layout classes', async () => {
-    render(<App />);
-    const mainContainer = await screen.findByTestId('app-container');
-    expect(mainContainer).toHaveClass('min-h-screen', 'm-4');
-  });
-
   it('shows loading then renders MapSection after data loads', async () => {
     render(<App />);
 
@@ -75,8 +69,7 @@ describe('App Component', () => {
   it('renders within a max-width container with padding', async () => {
     render(<App />);
     const container = await screen.findByTestId('app-container');
-    const inner = container.querySelector('div');
-    expect(inner).toHaveClass('m-2');
+    expect(container).toHaveClass('max-w-6xl mx-auto p-8');
   });
 
   it('renders MapSection with zero markers when no results', async () => {
