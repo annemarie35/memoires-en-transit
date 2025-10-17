@@ -73,7 +73,7 @@ export const Map: React.FC<MapProps> = ({
   };
 
   return (
-    <div className='h-[1280px] w-full bg-green-300'>
+    <div className='h-[1200px] w-full'>
       <MapContainer
         center={center}
         zoom={zoom}
@@ -81,6 +81,7 @@ export const Map: React.FC<MapProps> = ({
         scrollWheelZoom={true}
       >
         <TileLayer url={url} attribution={attribution} />
+
         {markers.map((marker, index) => {
           const testimonies = marker.testimonies || [];
           const currentIdx = popupIndexes[index] || 0;

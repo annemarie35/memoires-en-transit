@@ -26,12 +26,12 @@ function App() {
 
   return (
     <div className='min-h-screen m-4' data-testid='app-container'>
-      <div className='m-2'>
-        <header className='header'>
+      <div className='bg-emerald-300 m-2 p-4'>
+        <header className='header mb-6'>
           <h1 className='text-6xl'>{'MEMOIRE(S) EN TRANSIT'}</h1>
           <h2 className='text-4xl'>{'Filiation, exil, identité(s)'}</h2>
         </header>
-        <div className='max-w-6xl mx-auto p-8'>
+        <div className='bg-yellow-200 mx-auto'>
           {loading ? (
             <div className='text-center text-gray-500'>Chargement des marqueurs...</div>
           ) : (
