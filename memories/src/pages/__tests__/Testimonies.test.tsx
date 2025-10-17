@@ -1,7 +1,7 @@
-import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { Testimonies } from '../Testimonies';
+import { getTestimonies } from '../../infrastructure/get-testimonies';
 
 vi.mock('../../infrastructure/get-testimonies', () => ({
   getTestimonies: vi.fn().mockResolvedValue([
@@ -10,12 +10,16 @@ vi.mock('../../infrastructure/get-testimonies', () => ({
       genre: 'F',
       testimonyDate: '2024-01-01',
       testimonyCity: 'Paris',
+      date: '2024-01-01',
       testimonyLocation: [48.8566, 2.3522],
+      testimonyDepartment: '78',
+      birthDate: '1985',
+      birthPlace: 'Paris',
+      testifyingFor: '',
+      testimonyConcern: 'Ma soeur',
     },
   ]),
 }));
-
-import { getTestimonies } from '../../infrastructure/get-testimonies';
 
 describe('Testimonies Page', () => {
   beforeEach(() => {
@@ -29,10 +33,13 @@ describe('Testimonies Page', () => {
     expect(screen.getByTestId('count')).toHaveTextContent('1 témoignage(s)');
     expect(screen.getByText('Paris')).toBeInTheDocument();
     expect(screen.getByText('Un texte')).toBeInTheDocument();
+    expect(screen.getByText(/Ma soeur/i, { exact: false })).toBeInTheDocument();
   });
 
   it('shows error when service fails', async () => {
-    (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(new Error('fail'));
+    (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
+      new Error('fail')
+    );
     render(<Testimonies />);
     await waitFor(() => expect(screen.getByTestId('error')).toBeInTheDocument());
     expect(screen.getByTestId('error')).toHaveTextContent('Impossible de charger les témoignages');
