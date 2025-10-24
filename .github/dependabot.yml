@@ -6,7 +6,11 @@
 version: 2
 
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "npm"
+    directory: "/memories"
     schedule:
-      interval: "weekly"
+    interval: "weekly"
+    target-branch: "main"
+    labels:
+      - "npm dependencies"
+      - "frontend"
