@@ -51,7 +51,7 @@ describe('MapSection Component', () => {
 
   it('renders the title correctly', () => {
     render(<MapSection markers={markers} />);
-    expect(screen.getByText('Carte des Souvenirs')).toBeInTheDocument();
+    expect(screen.getByText('Carte des Témoignages')).toBeInTheDocument();
   });
 
   it('renders the Map component with markers', () => {

@@ -19,7 +19,7 @@ export const MapSection: React.FC<MapSectionProps> = ({
 
   return (
     <section className='w-full'>
-      <h1 className='text-3xl font-bold mb-4'>Carte des Souvenirs</h1>
+      <h1 className='text-3xl font-bold mb-4'>Carte des Témoignages</h1>
       <div className='relative'>
         <MapTypeSelector currentType={mapStyle} onTypeChange={setMapStyle} />
         <Map markers={markers} zoom={zoom} mapStyle={mapStyle} />
