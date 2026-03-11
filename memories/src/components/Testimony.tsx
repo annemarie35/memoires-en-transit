@@ -34,7 +34,7 @@ export const Testimony: React.FC<TestimonyProps> = ({
       </div>
 
       <div className='bg-white px-4 py-3 max-h-72 overflow-y-auto'>
-        <div className='text-[0.82rem] text-neutral-900 whitespace-pre-line leading-relaxed mb-3'>
+        <div className='text-base text-neutral-900 whitespace-pre-line leading-relaxed mb-3'>
           {testimony.text}
         </div>
 
