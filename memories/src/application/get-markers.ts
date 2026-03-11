@@ -2,7 +2,7 @@ export type Testimony = {
   text: string;
   genre?: string;
   date?: string;
-  theme?: [string];
+  theme?: string[];
 };
 
 export type Marker = {
