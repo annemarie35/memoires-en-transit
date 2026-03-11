@@ -88,13 +88,7 @@ describe('Map Component', () => {
   describe('Map Styles', () => {
     const mapStyles: { [key in MapStyle]: { url: string } } = {
       streets: {
-        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      },
-      satellite: {
-        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      },
-      terrain: {
-        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+        url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
       },
     };
 
@@ -103,14 +97,5 @@ describe('Map Component', () => {
       const tileLayer = screen.getByTestId('tile-layer');
       expect(tileLayer.getAttribute('data-url')).toBe(mapStyles.streets.url);
     });
-
-    it.each(['streets', 'satellite', 'terrain'] as MapStyle[])(
-      'renders correct tile layer for %s style',
-      (style) => {
-        render(<Map mapStyle={style} />);
-        const tileLayer = screen.getByTestId('tile-layer');
-        expect(tileLayer.getAttribute('data-url')).toBe(mapStyles[style].url);
-      }
-    );
   });
 });
