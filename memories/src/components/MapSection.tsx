@@ -1,6 +1,7 @@
 import React from 'react';
 import { Map } from './Map';
 import type { Marker } from '../application/get-markers';
+import { Link } from 'react-router-dom';
 
 interface MapSectionProps {
   markers: Marker[];
@@ -18,9 +19,17 @@ export const MapSection: React.FC<MapSectionProps> = ({
   zoom = 6,
 }) => {
   return (
-    <section className='w-full'>
-      <h1 className='text-3xl font-bold mb-4'>Carte des Témoignages</h1>
-      <div className='mb-4'>
+    <section data-testid='map-section-page' className='w-full'>
+      <div className='flex mb-4 justify-between'>
+        <h1 className='text-3xl font-bold'>Carte des Témoignages</h1>
+        <Link
+          to='/contribuez'
+          className='text-xl font-bold  text-black rounded hover:bg-yellow-500 transition-colors bg-amber-300 p-2'
+        >
+          Contribuez !
+        </Link>
+      </div>
+      <div className='flex items-center justify-between mb-4'>
         <select
           value={selectedCity}
           onChange={(e) => onCityChange(e.target.value)}

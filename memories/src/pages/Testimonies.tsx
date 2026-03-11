@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getTestimonies } from '../infrastructure/get-testimonies';
 import type { Testimony } from '../infrastructure/get-testimonies';
+import { Link } from 'react-router-dom';
 
 export const Testimonies: React.FC = () => {
   const [items, setItems] = useState<Testimony[]>([]);
@@ -28,8 +29,16 @@ export const Testimonies: React.FC = () => {
   }, []);
 
   return (
-    <div data-testid='testimonies-page' className='max-w-5xl mx-auto p-6'>
-      <h1 className='text-3xl font-bold mb-4'>Témoignages</h1>
+    <div data-testid='testimonies-page' className='max-w-6xl mx-auto p-8'>
+      <div className='flex mb-4 justify-between'>
+        <h1 className='text-3xl font-bold  '>Témoignages</h1>
+        <Link
+          to='/contribuez'
+          className='text-xl font-bold  text-black rounded hover:bg-yellow-500 transition-colors bg-amber-300 p-2'
+        >
+          Contribuez !
+        </Link>
+      </div>
       {loading && <div data-testid='loading'>Chargement…</div>}
       {error && (
         <div data-testid='error' className='text-red-600'>

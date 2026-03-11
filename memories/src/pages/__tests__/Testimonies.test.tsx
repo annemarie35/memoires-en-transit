@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { Testimonies } from '../Testimonies';
 import { getTestimonies } from '../../infrastructure/get-testimonies';
 
@@ -27,7 +28,7 @@ describe('Testimonies Page', () => {
   });
 
   it('shows loading then renders list with count', async () => {
-    render(<Testimonies />);
+    render(<MemoryRouter><Testimonies /></MemoryRouter>);
     expect(screen.getByTestId('loading')).toBeInTheDocument();
     await waitFor(() => expect(screen.getByTestId('list')).toBeInTheDocument());
     expect(screen.getByTestId('count')).toHaveTextContent('1 témoignage(s)');
@@ -40,7 +41,7 @@ describe('Testimonies Page', () => {
     (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
       new Error('fail')
     );
-    render(<Testimonies />);
+    render(<MemoryRouter><Testimonies /></MemoryRouter>);
     await waitFor(() => expect(screen.getByTestId('error')).toBeInTheDocument());
     expect(screen.getByTestId('error')).toHaveTextContent('Impossible de charger les témoignages');
   });
