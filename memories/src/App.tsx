@@ -61,7 +61,7 @@ function App() {
 
   const getErrorColor = () => {
     if (errorType === 'testimonies') return 'text-orange-600';
-    if (errorType === 'markers') return 'text-blue-600';
+    if (errorType === 'markers') return 'text-yellow-900';
     return 'text-red-600';
   };
 

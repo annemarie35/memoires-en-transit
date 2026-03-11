@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import type { Testimony as TestimonyType } from '../application/get-markers';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Testimony } from './Testimony';
 
-const icon = L.icon({
-  iconUrl: '/images/marker-icon.png',
-  iconRetinaUrl: '/images/marker-icon-2x.png',
-  shadowUrl: '/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
+const icon = L.divIcon({
+  className: '',
+  html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 44" width="36" height="44">
+    <path d="M18 2C9.7 2 3 8.7 3 17c0 10.4 15 25 15 25S33 27.4 33 17C33 8.7 26.3 2 18 2z" fill="#1e3a5f"/>
+    <circle cx="18" cy="17" r="10" fill="white" opacity="0.12"/>
+    <text x="10" y="24" font-size="20" fill="white" font-family="Georgia,serif">\u201C</text>
+  </svg>`,
+  iconSize: [36, 44],
+  iconAnchor: [18, 44],
+  popupAnchor: [0, -44],
 });
 
 export type MapStyle = 'streets';
@@ -77,7 +79,10 @@ export const Map: React.FC<MapProps> = ({
           const currentIdx = popupIndexes[index] || 0;
           return (
             <Marker key={index} position={[marker.position[0], marker.position[1]]} icon={icon}>
-              <Popup minWidth={288}>
+              <Tooltip direction='top' offset={[0, -44]} opacity={1}>
+                {marker.title}
+              </Tooltip>
+              <Popup minWidth={384}>
                 <Testimony
                   marker={marker}
                   currentIdx={currentIdx}

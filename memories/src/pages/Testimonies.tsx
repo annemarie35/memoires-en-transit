@@ -56,25 +56,25 @@ export const Testimonies: React.FC = () => {
                 <div className='text-sm text-gray-600 py-1 italic'>
                   Thèmes : {item.testimonyTheme || 'Thème inconnu'}{' '}
                 </div>
-                <div className='text-sm text-pink-400 mb-1'>
+                <div className='text-sm text-yellow-900 mb-1'>
                   Témoignage soumis le : {item.date}{' '}
                 </div>
-                <div className='text-sm text-pink-400 mb-1'>
+                <div className='text-sm text-yellow-900 mb-1'>
                   Département : {item.testimonyDepartment || 'Département inconnu'}{' '}
                 </div>
-                <div className='text-sm text-pink-400 mb-1'>
+                <div className='text-sm text-yellow-900 mb-1'>
                   Qui témoigne ? : {item.genre || 'Genre inconnu'}{' '}
                 </div>
-                <div className='text-sm text-pink-400 mb-1'>
+                <div className='text-sm text-yellow-900 mb-1'>
                   Date de naissance ? : {item.birthDate || 'Donnée non renseignée'}{' '}
                 </div>
-                <div className='text-sm text-pink-400 mb-1'>
+                <div className='text-sm text-yellow-900 mb-1'>
                   Lieu de naissance ? : {item.birthPlace || 'Donnée non renseignée'}{' '}
                 </div>
-                <div className='text-sm text-pink-400 mb-1'>
+                <div className='text-sm text-yellow-900 mb-1'>
                   Témoignage pour qui ? : {item.testifyingFor || 'Donnée non renseignée'}{' '}
                 </div>
-                <div className='text-sm text-pink-400 mb-1'>
+                <div className='text-sm text-yellow-900 mb-1'>
                   Qui est concerné ? : {item.testimonyConcern || 'Donnée non renseignée'}{' '}
                 </div>
               </li>

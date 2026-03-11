@@ -110,7 +110,6 @@ describe('App Component', () => {
         testimonyLocation: [43.7, 7.26],
       },
     ];
-    // @ts-expect-error - mock
     (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockResolvedValueOnce(sample);
 
     render(<App />);
@@ -156,7 +155,9 @@ describe('App Component', () => {
 
   it('applies orange style and alert icon when getTestimonies fails', async () => {
     const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(new Error('api down'));
+    (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
+      new Error('api down')
+    );
 
     render(<App />);
 
@@ -165,7 +166,11 @@ describe('App Component', () => {
     // svg icône orange présent dans le container
     const svgs = errorEl.querySelectorAll('svg');
     expect(svgs.length).toBeGreaterThan(0);
-    const hasOrangeIcon = Array.from(svgs).some((s) => s.className.baseVal?.includes('text-orange-500') || s.getAttribute('class')?.includes('text-orange-500'));
+    const hasOrangeIcon = Array.from(svgs).some(
+      (s) =>
+        s.className.baseVal?.includes('text-orange-500') ||
+        s.getAttribute('class')?.includes('text-orange-500')
+    );
     expect(hasOrangeIcon).toBe(true);
 
     expect(spy).toHaveBeenCalled();
@@ -174,16 +179,22 @@ describe('App Component', () => {
 
   it('applies blue style and cog icon when getMarkersGrouped fails', async () => {
     const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    (getMarkersGrouped as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(new Error('grouping failed'));
+    (getMarkersGrouped as unknown as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
+      new Error('grouping failed')
+    );
 
     render(<App />);
 
     const errorEl = await screen.findByTestId('error');
-    expect(errorEl.className).toMatch(/text-blue-600/);
+    expect(errorEl.className).toMatch(/text-yellow-900/);
     // svg icône bleue présent dans le container
     const svgs = errorEl.querySelectorAll('svg');
     expect(svgs.length).toBeGreaterThan(0);
-    const hasBlueIcon = Array.from(svgs).some((s) => s.className.baseVal?.includes('text-blue-500') || s.getAttribute('class')?.includes('text-blue-500'));
+    const hasBlueIcon = Array.from(svgs).some(
+      (s) =>
+        s.className.baseVal?.includes('text-blue-500') ||
+        s.getAttribute('class')?.includes('text-blue-500')
+    );
     expect(hasBlueIcon).toBe(true);
 
     expect(spy).toHaveBeenCalled();

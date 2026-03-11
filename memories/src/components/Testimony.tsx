@@ -23,8 +23,8 @@ export const Testimony: React.FC<TestimonyProps> = ({
   const testimony = testimonies[currentIdx];
 
   return (
-    <div className='w-72 overflow-hidden'>
-      <div className='bg-[#1e3a5f] text-white px-4 py-3 flex justify-between items-start'>
+    <div className='w-96 overflow-hidden'>
+      <div className='bg-yellow-600 text-white px-4 py-3 flex justify-between items-start'>
         <h3 className='font-bold text-[1.05rem]'>{marker.title}</h3>
         {testimonies.length > 1 && (
           <span className='text-[0.78rem] text-white/70 mt-0.5 ml-2 shrink-0'>
@@ -34,60 +34,56 @@ export const Testimony: React.FC<TestimonyProps> = ({
       </div>
 
       <div className='bg-white px-4 py-3 max-h-72 overflow-y-auto'>
-        {/* Themes — .tab-section-title + .meta-tag.meta-blue */}
-        {testimony.theme && testimony.theme.length > 0 && (
-          <div className='mb-3'>
-            <div className='text-[0.68rem] font-bold uppercase tracking-widest text-[#2563eb] mb-2'>
-              Thèmes
-            </div>
-            <div className='flex flex-wrap gap-1'>
-              {testimony.theme.map((t, i) => (
-                <span
-                  key={i}
-                  className='text-[0.68rem] px-2 py-0.5 rounded-full font-medium bg-[#eff6ff] text-[#2563eb]'
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Testimony text */}
-        <div className='text-[0.82rem] text-[#111827] whitespace-pre-line leading-relaxed mb-3'>
+        <div className='text-[0.82rem] text-neutral-900 whitespace-pre-line leading-relaxed mb-3'>
           {testimony.text}
         </div>
 
-        {/* Genre & date — .data-row */}
         {(testimony.genre || testimony.date) && (
-          <div className='flex justify-between items-center pt-2 border-t border-[#e5e7eb] text-[0.75rem]'>
-            {testimony.genre && <span className='text-[#6b7280]'>{testimony.genre}</span>}
+          <div className='flex justify-between items-center pt-2 border-t border-neutral-200 text-[0.75rem]'>
+            {testimony.genre && <span className='text-neutral-500'>Qui ? {testimony.genre}</span>}
             {testimony.date && (
-              <span className='font-semibold text-[#111827]'>{testimony.date}</span>
+              <span className='font-semibold text-neutral-900'>Quand ? {testimony.date}</span>
             )}
           </div>
         )}
+
+        {/*{testimony.theme && testimony.theme.length > 0 && (*/}
+        {/*  <div className='mb-3'>*/}
+        {/*    <div className='text-[0.68rem] font-bold uppercase tracking-widest text-neutral-600 mb-2'>*/}
+        {/*      Thèmes XXX*/}
+        {/*    </div>*/}
+        {/*    <div className='flex flex-wrap gap-1'>*/}
+        {/*      {testimony.theme.map((t, i) => (*/}
+        {/*        <span*/}
+        {/*          key={i}*/}
+        {/*          className='text-[0.68rem] px-2 py-0.5 rounded-full font-medium bg-yellow-100 text-neutral-500'*/}
+        {/*        >*/}
+        {/*          {t}*/}
+        {/*        </span>*/}
+        {/*      ))}*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*)}*/}
       </div>
 
-      {/* Navigation footer */}
       {testimonies.length > 1 && (
-        <div className='bg-[#f9fafb] border-t border-[#e5e7eb] flex justify-between items-center px-3 py-2'>
+        <div className='bg-neutral-100 border-t border-neutral-200 flex justify-between items-center px-3 py-2'>
           <button
             aria-label='Précédent'
             onClick={onPrev}
-            className='p-1 rounded hover:bg-[#e5e7eb] transition-colors'
+            className='p-1 rounded hover:bg-neutral-200 transition-colors'
           >
-            <ArrowLeftIcon className='h-4 w-4 text-[#6b7280]' />
+            <ArrowLeftIcon className='h-4 w-4 text-neutral-500' />
           </button>
-          <span className='text-[0.72rem] text-[#6b7280]'>
+          <span className='text-[0.72rem] text-neutral-500'>
             Témoignage {currentIdx + 1} / {testimonies.length}
           </span>
           <button
             aria-label='Suivant'
             onClick={onNext}
-            className='p-1 rounded hover:bg-[#e5e7eb] transition-colors'
+            className='p-1 rounded hover:bg-neutral-200 transition-colors'
           >
-            <ArrowRightIcon className='h-4 w-4 text-[#6b7280]' />
+            <ArrowRightIcon className='h-4 w-4 text-neutral-500' />
           </button>
         </div>
       )}

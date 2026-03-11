@@ -28,7 +28,7 @@ describe('Menu', () => {
     expect(accueil.className).toMatch(
       'px-3 py-2 rounded hover:bg-gray-100bg-gray-S00 bg-gray-200 font-semibold'
     );
-    expect(temoignages.className).not.toMatch(/text-blue-600/);
+    expect(temoignages.className).not.toMatch(/text-yellow-900/);
   });
 
   it('highlights Témoignages when on /temoignages', () => {
@@ -38,6 +38,6 @@ describe('Menu', () => {
     expect(temoignages.className).toMatch(
       'px-3 py-2 rounded hover:bg-gray-100bg-gray-S00 bg-gray-200 font-semibold'
     );
-    expect(accueil.className).not.toMatch(/text-blue-600/);
+    expect(accueil.className).not.toMatch(/text-yellow-900/);
   });
 });
