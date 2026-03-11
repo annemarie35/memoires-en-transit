@@ -27,11 +27,15 @@ vi.mock('react-leaflet', () => ({
   Popup: ({ children }: { children: React.ReactNode }) => (
     <div data-testid='map-popup'>{children}</div>
   ),
+  Tooltip: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid='map-tooltip'>{children}</div>
+  ),
 }));
 
 vi.mock('leaflet', () => ({
   default: {
     icon: () => ({}),
+    divIcon: () => ({}),
   },
 }));
 
@@ -54,7 +58,7 @@ describe('Map Component', () => {
 
     render(<Map markers={markers} />);
     expect(screen.getByTestId('map-marker')).toBeInTheDocument();
-    expect(screen.getByText('Paris (1)')).toBeInTheDocument();
+    expect(screen.getAllByText('Paris (1)').length).toBeGreaterThan(0);
     expect(screen.getByText('City of Light')).toBeInTheDocument();
   });
 
@@ -75,8 +79,8 @@ describe('Map Component', () => {
     render(<Map markers={markers} />);
     const markerElements = screen.getAllByTestId('map-marker');
     expect(markerElements).toHaveLength(2);
-    expect(screen.getByText('Paris (1)')).toBeInTheDocument();
-    expect(screen.getByText('Lyon (1)')).toBeInTheDocument();
+    expect(screen.getAllByText('Paris (1)').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Lyon (1)').length).toBeGreaterThan(0);
   });
 
   it('uses default center and zoom when not provided', () => {

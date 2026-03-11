@@ -8,6 +8,7 @@ export type Testimony = {
 export type Marker = {
   position: [number, number];
   title: string;
+  city: string;
   testimonies: Testimony[];
 };
 
@@ -42,6 +43,7 @@ export async function getMarkersGrouped(
   return Object.values(positionMap).map(({ position, city, testimonies }) => ({
     position,
     title: `${city} (${testimonies.length})`,
+    city,
     testimonies,
   }));
 }

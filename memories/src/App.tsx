@@ -6,10 +6,14 @@ import { getTestimonies } from './infrastructure/get-testimonies.ts';
 import { ExclamationTriangleIcon, CogIcon } from '@heroicons/react/24/solid';
 
 function App() {
-  const [markers, setMarkers] = useState<Marker[]>([]);
+  const [allMarkers, setAllMarkers] = useState<Marker[]>([]);
+  const [selectedCity, setSelectedCity] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [errorType, setErrorType] = useState<'testimonies' | 'markers' | null>(null);
+
+  const cities = allMarkers.map((m) => m.city).sort();
+  const markers = selectedCity ? allMarkers.filter((m) => m.city === selectedCity) : allMarkers;
 
   useEffect(() => {
     let isMounted = true;
@@ -23,7 +27,7 @@ function App() {
         try {
           const marker = await getMarkersGrouped(data);
           if (!isMounted) return;
-          setMarkers(marker);
+          setAllMarkers(marker);
           setLoading(false);
         } catch (error) {
           // TODO Log errors properly
@@ -77,7 +81,14 @@ function App() {
           {error}
         </div>
       )}
-      {!loading && !error && <MapSection markers={markers} />}
+      {!loading && !error && (
+        <MapSection
+          markers={markers}
+          cities={cities}
+          selectedCity={selectedCity}
+          onCityChange={setSelectedCity}
+        />
+      )}
     </div>
   );
 }

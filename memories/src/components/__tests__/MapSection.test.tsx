@@ -18,25 +18,34 @@ describe('MapSection Component', () => {
   const markers = [
     {
       position: [48.8566, 2.3522] as [number, number],
-      title: 'Paris',
+      title: 'Paris (1)',
+      city: 'Paris',
       testimonies: [],
     },
     {
       position: [45.764, 4.8357] as [number, number],
-      title: 'Lyon',
+      title: 'Lyon (1)',
+      city: 'Lyon',
       testimonies: [],
     },
   ];
 
+  const defaultProps = {
+    markers,
+    cities: ['Lyon', 'Paris'],
+    selectedCity: '',
+    onCityChange: vi.fn(),
+  };
+
   it('renders the title correctly', () => {
-    render(<MapSection markers={markers} />);
+    render(<MapSection {...defaultProps} />);
     expect(screen.getByText('Carte des Témoignages')).toBeInTheDocument();
   });
 
   it('renders the Map component with markers', () => {
-    render(<MapSection markers={markers} />);
+    render(<MapSection {...defaultProps} />);
     expect(screen.getByTestId('map')).toBeInTheDocument();
-    expect(screen.getByText('Paris')).toBeInTheDocument();
-    expect(screen.getByText('Lyon')).toBeInTheDocument();
+    expect(screen.getByText('Paris (1)')).toBeInTheDocument();
+    expect(screen.getByText('Lyon (1)')).toBeInTheDocument();
   });
 });
