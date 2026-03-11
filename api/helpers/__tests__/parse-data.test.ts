@@ -26,15 +26,17 @@ describe('parse data', () => {
   });
 
   describe('parseBirthDate', () => {
-    const testimonies = [
-      { birthDate: '24/08/1988'},
-      { birthDate: '19/11/1958'},
-    ];
+    it('should return year for birthdate', () => {
+      const testimonies = [
+        { birthDate: '24/08/1988'},
+        { birthDate: '19/11/1958'},
+      ];
 
-    expect(parseBirthDate(testimonies)).toEqual([
-      { birthDate: '1988'},
-      { birthDate: '1958'},
-    ])
+      expect(parseBirthDate(testimonies)).toEqual([
+        { birthDate: '1988'},
+        { birthDate: '1958'},
+      ])
+    })
   })
 
   describe('getPositionFromCity', () => {

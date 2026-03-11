@@ -1,9 +1,9 @@
 export async function getTestimonies(): Promise<Testimony[] | []> {
-  const TESTIMONIES_URL = 'http://localhost:3000/testimonies';
+  const TESTIMONIES_URL = '/temoignages-enriched.json';
   try {
     const response = await fetch(TESTIMONIES_URL, { method: 'GET' });
     if (!response.ok) {
-      throw new Error(`Testimonies API error: ${response.status}`);
+      throw new Error(`Testimonies fetch error: ${response.status}`);
     }
     return await response.json();
   } catch (error) {

@@ -29,6 +29,6 @@ describe('getTestimonies (API)', () => {
 
     const result = await getTestimonies();
     expect(result).toEqual(mockData);
-    expect(fetch).toHaveBeenCalledWith('http://localhost:3000/testimonies', { method: 'GET' });
+    expect(fetch).toHaveBeenCalledWith('/temoignages-enriched.json', { method: 'GET' });
   });
 });
