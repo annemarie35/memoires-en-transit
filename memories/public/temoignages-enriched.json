@@ -186,13 +186,16 @@
     "birthDate": "1978",
     "testimonyConcern": "Cela m'est arrivé",
     "testifyingFor": "",
-    "testimonyCity": "",
+    "testimonyCity": "Ville non renseignée",
     "testimonyDepartment": "26",
     "testifyingForBithPlace": "",
     "testimonyDate": "Récemment ",
     "testimonyTheme": "les préjugés, les clichés ou stéréotypes sur les portugais, une orientation forcée dans le secteur du bâtiment, proposition d'emploi dans pole emploi dans un secteur professionel caractéristique des portugais, l'accent",
     "testimony": "Dans un entretien d'embauche, on m'a dit d'aller chercher du travail \"dans le ménage ou chez le restaurant du coeur\". Je suis diplômée d'une université portugaise (Coimbra) et on m'a questionnée sur la authenticité de mon diplôme, car ils ne savaient pas que au Portugal il avait des universités! Et souvent j' entends  des commentaires comme par exemple \" pas mal pour une portugaise\", \" c'est de la misère au Portugal, ici en France il y a des aides\". \n\nJe suis en France depuis 4 ans.",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      44.92155,
+      4.900215
+    ]
   },
   {
     "date": "6/29/2020 19:51:51",
@@ -255,13 +258,16 @@
     "birthDate": "1974",
     "testimonyConcern": "Cela m'est arrivé",
     "testifyingFor": "",
-    "testimonyCity": "",
+    "testimonyCity": "Ville non renseignée",
     "testimonyDepartment": "26",
     "testifyingForBithPlace": "",
     "testimonyDate": "",
     "testimonyTheme": "les préjugés, les clichés ou stéréotypes sur les portugais, une orientation forcée dans le secteur du bâtiment, proposition d'emploi dans pole emploi dans un secteur professionel caractéristique des portugais, l'accent",
     "testimony": "Da minha experiência e daquilo que observo, a xenofobia não é em especial contra os portugueses, mas contra os estrangeiros em geral. Parabéns pela iniciativa.",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      44.92155,
+      4.900215
+    ]
   },
   {
     "date": "6/30/2020 11:47:45",
@@ -306,13 +312,16 @@
     "birthDate": "1980",
     "testimonyConcern": "Cela m'est arrivé",
     "testifyingFor": "",
-    "testimonyCity": "",
+    "testimonyCity": "Ville non renseignée",
     "testimonyDepartment": "",
     "testifyingForBithPlace": "",
     "testimonyDate": "",
     "testimonyTheme": "les papiers d’identité",
     "testimony": "Je me suis souvent fait arrêté par les contrôleurs dans les transports sans avoir de ticket car je suis un fraudeur militant. À chaque contrôle, on me parle mal parce que je n'ai que la nationalité française et donc une carte d'identité portugaise. Celle-ci n'a pas d'adresse car les portugais sont identifiés par le numéro fiscal. À chaque fois on me menace de n’emmener au poste de police même si j'explique que se sont des papiers en règle. Régulièrement on me dit que je mens, que je suis française ou que je devrais l'être, comme si c'était une récompense pour bon services rendus. Ainsi, au mieux de perdre 5 minutes à remplir l'amende, je passe parfois une heure en si charmante compagnie, un groupe de personnes qui vocifère que je devrais avoir des papiers français. Je ne peux qu'imaginer l'horreur qu'ils font vivre aux sans papiers... Si je fraude moins aujourd'hui, ce n'est pas à cause des amendes mais de ces actes discriminants.",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      49.2157750,
+      -2.1217346
+    ]
   },
   {
     "date": "6/30/2020 12:10:20",
@@ -497,17 +506,20 @@
   {
     "date": "7/1/2020 23:24:25",
     "genre": "Une femme",
-    "birthPlace": "A Porto / Portugal",
+    "birthPlace": "A Porto, Portugal",
     "birthDate": "1947",
     "testimonyConcern": "Cela m'est arrivé",
     "testifyingFor": "",
-    "testimonyCity": "Paris/Montreuil",
+    "testimonyCity": "Paris, Montreuil",
     "testimonyDepartment": "75, 93",
     "testifyingForBithPlace": "",
     "testimonyDate": "",
     "testimonyTheme": "les remarques dégradantes ou injures raciales, voisinage",
     "testimony": "Cela s'est passé il y a  plus de 40 ans  mais ça m'a laissé gravé dans mon coeur, pour tjs car je venais d'arriver en France depuis peu de temps.\n Une voisine française  qui m'a carrément  empechée de mettre les couches de mon bébe ( il n'y avait pas encore les  jettables)´á secher dans  la cour  car  toutes les semaines (, j'avais 20 ans et elle plus de 50 ans) elle lavait ses rideaux et comme nous etions  tous co-propriétaires de notre logement , c'ést vrai elle avait ce droit mais elle me disait avec un air méprisant: ''va donc, laver ton linge chez toi au Portugal'' et cela '' m'a donn'e'' la premiére phrase raciste  qui m'a marqué. j'en ai vu d'autres   situations bien plus  mauvaises du a mon métier dans le Social hélas....",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      48.8588897,
+      2.320041
+    ]
   },
   {
     "date": "7/2/2020 1:44:07",
@@ -1152,7 +1164,10 @@
     "testimonyDate": "1992",
     "testimonyTheme": "Remarques xénophobes lors de la passation du concours de praticien hospitalier ( psychiatrie)",
     "testimony": "“Vous venez manger le pain des français “ me lance un membre du jury en apprenant que je suis d’origine  portugaise (quoique ayant aussi la nationalité française)",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      48.8587571,
+      2.3328439
+    ]
   },
   {
     "date": "7/12/2020 9:46:14",
@@ -1203,7 +1218,10 @@
     "testimonyDate": "De tout temps ",
     "testimonyTheme": "les préjugés, les clichés ou stéréotypes sur les portugais, une orientation forcée dans le secteur du bâtiment, proposition d'emploi dans pole emploi dans un secteur professionel caractéristique des portugais",
     "testimony": "Machado transforme en la chasse d eau.   Les portugaises poilues.  Les hommes portugais portent moustache pour ressembler à leur mère.   Morue.  Tu prends le travail des français.  Les hommes portugais au bâtiment.  Les femmes au menache.  Les portugais de petites tailles et trapus. Trapues.  ",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      48.8587571,
+      2.3328439
+    ]
   },
   {
     "date": "7/13/2020 0:11:52",
@@ -1272,7 +1290,10 @@
     "testimonyDate": "De tout temps ",
     "testimonyTheme": "les préjugés, les clichés ou stéréotypes sur les portugais, une orientation forcée dans le secteur du bâtiment, proposition d'emploi dans pole emploi dans un secteur professionel caractéristique des portugais",
     "testimony": "Machado transforme en la chasse d eau.   Les portugaises poilues.  Les hommes portugais portent moustache pour ressembler à leur mère.   Morue.  Tu prends le travail des français.  Les hommes portugais au bâtiment.  Les femmes au menache.  Les portugais de petites tailles et trapus. Trapues.  ",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      48.8587571,
+      2.3328439
+    ]
   },
   {
     "date": "8/20/2020 11:25:22",
@@ -1335,13 +1356,16 @@
     "birthDate": "1970",
     "testimonyConcern": "On me l'a raconté ou j'ai été témoin",
     "testifyingFor": "",
-    "testimonyCity": "",
+    "testimonyCity": "Ville non renseignée",
     "testimonyDepartment": "",
     "testifyingForBithPlace": "",
     "testimonyDate": "",
     "testimonyTheme": "les préjugés, les clichés ou stéréotypes sur les portugais",
     "testimony": "Nas redes sociais circula um vídeo de promoção de uma comédia que vai estrear no Natal, intitulada de \"Opération Portugal\". Mais uma vez, todos os estereótipos dos portugueses, na França, estão presentes e extremados ao ridículo, pelo ator D'jal e companhia. ",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      49.2157750,
+      -2.1217346
+    ]
   },
   {
     "date": "10/12/2020 15:49:46",
@@ -1350,13 +1374,16 @@
     "birthDate": "",
     "testimonyConcern": "Cela m'est arrivé",
     "testifyingFor": "",
-    "testimonyCity": "",
+    "testimonyCity": "Ville non renseignée",
     "testimonyDepartment": "",
     "testifyingForBithPlace": "",
     "testimonyDate": "2015",
     "testimonyTheme": "les préjugés, les clichés ou stéréotypes sur les portugais",
     "testimony": "Au collège en 3eme, un mec de ma classe m'a demandé de réparer la porte vu que j'étais à moitié portugaise, et que j'avais le bâtiment dans le sang.",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      49.2157750,
+      -2.1217346
+    ]
   },
   {
     "date": "10/13/2020 10:51:48",
@@ -1473,13 +1500,16 @@
     "birthDate": "2001",
     "testimonyConcern": "On me l'a raconté ou j'ai été témoin",
     "testifyingFor": "",
-    "testimonyCity": "",
+    "testimonyCity": "Ville non renseignée",
     "testimonyDepartment": "",
     "testifyingForBithPlace": "Au Portugal",
     "testimonyDate": "",
     "testimonyTheme": "les préjugés, les clichés ou stéréotypes sur les portugais, une orientation forcée dans le secteur du bâtiment, proposition d'emploi dans pole emploi dans un secteur professionel caractéristique des portugais",
     "testimony": "Merci beaucoup",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      49.2157750,
+      -2.1217346
+    ]
   },
   {
     "date": "2/19/2021 21:48:36",
@@ -1506,13 +1536,16 @@
     "birthDate": "1978",
     "testimonyConcern": "On me l'a raconté ou j'ai été témoin",
     "testifyingFor": "",
-    "testimonyCity": "",
+    "testimonyCity": "Ville non renseignée",
     "testimonyDepartment": "",
     "testifyingForBithPlace": "",
     "testimonyDate": "",
     "testimonyTheme": "les préjugés, les clichés ou stéréotypes sur les portugais, une orientation forcée dans le secteur du bâtiment, proposition d'emploi dans pole emploi dans un secteur professionel caractéristique des portugais, les remarques dégradantes ou injures raciales",
     "testimony": "https://www.facebook.com/watch/?v=428549111665657",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      49.2157750,
+      -2.1217346
+    ]
   },
   {
     "date": "6/26/2021 9:21:52",
@@ -1527,7 +1560,10 @@
     "testimonyDate": "2016,2017,2018,2019,2020 et2021",
     "testimonyTheme": "les préjugés, les clichés ou stéréotypes sur les portugais, une orientation forcée dans le secteur du bâtiment, proposition d'emploi dans pole emploi dans un secteur professionel caractéristique des portugais, les papiers d’identité, les remarques dégradantes ou injures raciales, l'accent, Courrier dans boite aux lettres, \"la France interdite aux chiens et aux Portugais\"",
     "testimony": "\"La France est interdite aux chiens et aux Portugais\"",
-    "testimonyLocation": null
+    "testimonyLocation": [
+      48.0176650,
+      2.7158730
+    ]
   },
   {
     "date": "8/29/2021 18:56:11",
