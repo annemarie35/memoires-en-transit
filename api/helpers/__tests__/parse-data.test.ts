@@ -1,13 +1,9 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 import { keyMap, renameKeysAuto, getPositionFromCity, enrichTestimoniesWithLocation } from '../parse-data';
 
 describe('parse data', () => {
-  // afterEach(() => {
-  //   vi.restoreAllMocks();
-  // });
-
   describe('renameKeysAuto', () => {
     const jsonPath = path.resolve(__dirname, 'raw-data-test.json');
     const data = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
@@ -24,7 +20,21 @@ describe('parse data', () => {
   });
 
   describe('getPositionFromCity', () => {
-    const mockParisResult = [{"place_id":88066702,"licence":"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright","osm_type":"relation","osm_id":71525,"lat":"48.8534951","lon":"2.3483915","class":"boundary","type":"administrative","place_rank":12,"importance":0.8845663630228834,"addresstype":"city","name":"Paris","display_name":"Paris, Île-de-France, France métropolitaine, France","boundingbox":["48.8155755","48.9021560","2.2241220","2.4697602"]}];
+    const mockParisResult = [{
+      "place_id":88066702,
+      "licence":"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type":"relation",
+      "osm_id":71525,
+      "lat":"48.8534951",
+      "lon":"2.3483915",
+      "class":"boundary",
+      "type":"administrative",
+      "place_rank":12,"importance":0.8845663630228834,
+      "addresstype":"city",
+      "name":"Paris",
+      "display_name":"Paris, Île-de-France, France métropolitaine, France",
+      "boundingbox":["48.8155755","48.9021560","2.2241220","2.4697602"]
+    }];
     const mockEmptyResult: any[] = [];
 
     it('should return an array with at least one result for a known city', async () => {
@@ -57,7 +67,6 @@ describe('parse data', () => {
     const mockGetPositionFromCity = vi.fn().mockResolvedValue(mockLocation);
 
     it('should add testimonyLocation to each testimony', async () => {
-      //TODO test red in CI FIXIT
       const testimonies = [
         { testimonyCity: 'Paris', foo: 'bar' },
         { testimonyCity: 'Lyon', foo: 'baz' },

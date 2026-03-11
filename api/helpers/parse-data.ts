@@ -1,6 +1,3 @@
-import fetch from 'node-fetch';
-import testimonies from '../data/temoignages-clean.json';
-
 export const keyMap: Record<string, string> = {
   'Carimbo de data/hora': 'date',
   'Vous êtes ?': 'genre',
@@ -38,10 +35,10 @@ export function renameKeysAuto<T extends Record<string, string>>(
 ): Omit<TemoignagesClean, 'testimonyLocation'>[] {
   return rawTestimonies.map(testimony => {
     const newObj: Record<string, string> = {};
-    for (const key in testimony) {
-      if (Object.prototype.hasOwnProperty.call(testimony, key)) {
-        const newKey = mapping[key] || key;
-        newObj[newKey] = testimony[key];
+    for (const testimonyKey in testimony) {
+      if (Object.prototype.hasOwnProperty.call(testimony, testimonyKey)) {
+        const newKey = mapping[testimonyKey] || testimonyKey;
+        newObj[newKey] = testimony[testimonyKey];
       }
     }
     return newObj as Omit<TemoignagesClean, 'testimonyLocation'>;
@@ -57,6 +54,7 @@ export async function getPositionFromCity(city: string): Promise<Location|null> 
   }
   const data = await response.json();
   // TODO Enlever les éléments redondants avec l'appel api fait par le serveur
+
 
   if (data && data.length > 0) {
     const lat = parseFloat(data[0].lat);

@@ -8,7 +8,6 @@ const TEST_ENRICHED_PATH = path.join(__dirname, '../../data/temoignages-enriched
 
 describe('clean-data-script integration', () => {
   it('should clean and enrich testimonies, handling errors', async () => {
-    // Données de test
     const testimonies = [
       { 'Carimbo de data/hora': 'date', 'Vous êtes ?': 'genre', 'Où êtes vous né.e ?': 'birth', 'Votre témoignage': 'foo', 'Dans quelle ville se situe votre témoignage ?': 'Paris' },
       { 'Carimbo de data/hora': 'date', 'Vous êtes ?': 'genre', 'Où êtes vous né.e ?': 'birth', 'Votre témoignage': 'bar', 'Dans quelle ville se situe votre témoignage ?': 'Lyon' },
@@ -16,12 +15,10 @@ describe('clean-data-script integration', () => {
     const cleaned = renameKeysAuto(testimonies, keyMap);
     await fs.writeFile(TEST_CLEAN_PATH, JSON.stringify(cleaned, null, 2), 'utf-8');
 
-    // Mock getPositionFromCity
     const mockGetPositionFromCity = vi.fn()
       .mockResolvedValueOnce([48.8566, 2.3522])
       .mockRejectedValueOnce(new Error('API error'));
 
-    // Enrichissement avec gestion d'erreur
     const safeGetPositionFromCity = async (city: string) => {
       try {
         return await mockGetPositionFromCity(city);
@@ -32,7 +29,6 @@ describe('clean-data-script integration', () => {
     const enriched = await enrichTestimoniesWithLocation(cleaned, safeGetPositionFromCity);
     await fs.writeFile(TEST_ENRICHED_PATH, JSON.stringify(enriched, null, 2), 'utf-8');
 
-    // Vérifications
     const enrichedRead = JSON.parse(await fs.readFile(TEST_ENRICHED_PATH, 'utf-8'));
     expect(enrichedRead[0].testimonyLocation).toEqual([48.8566, 2.3522]);
     expect(enrichedRead[1].testimonyLocation).toBeNull();
