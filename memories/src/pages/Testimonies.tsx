@@ -6,7 +6,6 @@ export const Testimonies: React.FC = () => {
   const [items, setItems] = useState<Testimony[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
@@ -49,13 +48,8 @@ export const Testimonies: React.FC = () => {
                   <span>{item.testimonyCity || 'Ville inconnue'}</span>
                   {' · '}
                   <span>{item.testimonyDate || item.date || 'Date inconnue'}</span>
-                  {' · '}
-                  <span>{item.genre || 'Genre inconnu'}</span>
                 </div>
-                <div className='text-gray-800 whitespace-pre-line'>{item.testimony}</div>
-                <div className='text-sm text-gray-600 py-1 italic'>
-                  Thèmes : {item.testimonyTheme || 'Thème inconnu'}{' '}
-                </div>
+                <div className='text-gray-800 whitespace-pre-line mb-3'>{item.testimony}</div>
                 <div className='text-sm text-yellow-900 mb-1'>
                   Témoignage soumis le : {item.date}{' '}
                 </div>
@@ -76,6 +70,22 @@ export const Testimonies: React.FC = () => {
                 </div>
                 <div className='text-sm text-yellow-900 mb-1'>
                   Qui est concerné ? : {item.testimonyConcern || 'Donnée non renseignée'}{' '}
+                </div>
+                <div className='text-sm text-gray-600 py-1'>
+                  {item.testimonyTheme ? (
+                    <div className='flex flex-wrap gap-1 mt-1'>
+                      {item.testimonyTheme.split(',').map((theme, i) => (
+                        <span
+                          key={i}
+                          className='bg-yellow-100 text-gray-700 px-2 py-0.5 rounded-full italic'
+                        >
+                          {theme.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <span className='italic'>Thème inconnu</span>
+                  )}
                 </div>
               </li>
             ))}
