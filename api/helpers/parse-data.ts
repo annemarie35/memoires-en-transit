@@ -1,3 +1,5 @@
+import {extractYear} from "./date-helpers";
+
 export const keyMap: Record<string, string> = {
   'Carimbo de data/hora': 'date',
   'Vous êtes ?': 'genre',
@@ -81,6 +83,13 @@ export async function enrichTestimoniesWithLocation<
   );
   return enriched;
 }
+
+export function parseBirthDate<T extends { birthDate?: string }>(testimonies: T[]): T[] {
+  return testimonies.map(t => ({
+    ...t,
+    birthDate: t.birthDate !== undefined ? extractYear(t.birthDate) : t.birthDate,
+  }))}
+
 
 type Location = [latitude, longitude];
 type latitude = number

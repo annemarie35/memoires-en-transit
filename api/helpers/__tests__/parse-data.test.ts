@@ -1,7 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
 import fs from 'fs';
 import path from 'path';
-import { keyMap, renameKeysAuto, getPositionFromCity, enrichTestimoniesWithLocation } from '../parse-data';
+import {
+  keyMap,
+  renameKeysAuto,
+  getPositionFromCity,
+  enrichTestimoniesWithLocation,
+  parseBirthDate
+} from '../parse-data';
 
 describe('parse data', () => {
   describe('renameKeysAuto', () => {
@@ -18,6 +24,18 @@ describe('parse data', () => {
         }
     );
   });
+
+  describe('parseBirthDate', () => {
+    const testimonies = [
+      { birthDate: '24/08/1988'},
+      { birthDate: '19/11/1958'},
+    ];
+
+    expect(parseBirthDate(testimonies)).toEqual([
+      { birthDate: '1988'},
+      { birthDate: '1958'},
+    ])
+  })
 
   describe('getPositionFromCity', () => {
     const mockParisResult = [{

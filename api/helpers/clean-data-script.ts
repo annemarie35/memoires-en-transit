@@ -1,38 +1,37 @@
-// @ts-ignore
-import fs from 'fs/promises';
-// @ts-ignore
-import path from 'path';
-import { renameKeysAuto, keyMap, enrichTestimoniesWithLocation, getPositionFromCity } from './parse-data';
+import path from "path";
+import fs from "fs/promises";
+import {enrichTestimoniesWithLocation, getPositionFromCity, keyMap, parseBirthDate, renameKeysAuto} from "./parse-data";
 
-async function cleanTestimonies() {
-  const filePath = path.join(__dirname, '../data/temoignages.json');
-  const raw = await fs.readFile(filePath, 'utf-8');
-  const testimonies = JSON.parse(raw);
-  const cleaned = renameKeysAuto(testimonies, keyMap);
-  return cleaned;
+async function safeGetPositionFromCity(city: string) {
+  try {
+    return await getPositionFromCity(city);
+  } catch (err) {
+    console.error(`Erreur pour la ville "${city}":`, err);
+    return null;
+  }
 }
 
-if (require.main === module) {
-  cleanTestimonies().then(async cleaned => {
-    const outPath = path.join(__dirname, '../data/temoignages-clean.json');
-    await fs.writeFile(outPath, JSON.stringify(cleaned, null, 2), 'utf-8');
-    console.log(`Fichier nettoyé écrit dans ${outPath}`);
+const RAW_TESTIMONIES_FILE_PATH = path.join(__dirname, '../data/temoignages.json');
+const CLEAN_TESTIMONIES_FILE_PATH = path.join(__dirname, '../data/temoignages-clean.json');
+const ENRICHED_TESTIMONIES_FILE_PATH = path.join(__dirname, '../data/temoignages-enriched.json');
 
-    const safeGetPositionFromCity = async (city: string) => {
-      try {
-        return await getPositionFromCity(city);
-      } catch (err) {
-        console.error(`Erreur pour la ville "${city}":`, err);
-        return null;
-      }
-    };
-    const enriched = await enrichTestimoniesWithLocation(cleaned, safeGetPositionFromCity);
-    const enrichedPath = path.join(__dirname, '../data/temoignages-enriched.json');
-    await fs.writeFile(enrichedPath, JSON.stringify(enriched, null, 2), 'utf-8');
-    console.log(`Fichier enrichi écrit dans ${enrichedPath}`);
-  }).catch(err => {
-    console.error('Erreur nettoyage témoignages:', err);
-  });
+
+export const toto = async () => {
+  const raw = await fs.readFile(RAW_TESTIMONIES_FILE_PATH, 'utf-8');
+  const rawTestimonies = JSON.parse(raw);
+
+  const withCleanKeysTestimonies =  renameKeysAuto(rawTestimonies, keyMap);
+
+  await fs.writeFile(CLEAN_TESTIMONIES_FILE_PATH, JSON.stringify(withCleanKeysTestimonies, null, 2), 'utf-8');
+  console.log(`Fichier nettoyé écrit dans ${CLEAN_TESTIMONIES_FILE_PATH}`);
+
+  const enrichedWithLocationCoordinates = await enrichTestimoniesWithLocation(withCleanKeysTestimonies, safeGetPositionFromCity);
+
+  const enrichedWithParsedBirthDate = parseBirthDate(enrichedWithLocationCoordinates)
+
+  await fs.writeFile(ENRICHED_TESTIMONIES_FILE_PATH, JSON.stringify(enrichedWithParsedBirthDate, null, 2), 'utf-8');
+  console.log(`Fichier enrichi écrit dans ${ENRICHED_TESTIMONIES_FILE_PATH}`);
+  return enrichedWithParsedBirthDate
 }
 
-export default cleanTestimonies; 
+toto()
