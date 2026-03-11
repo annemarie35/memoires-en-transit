@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd memories && npm install && npm run build",
+  "outputDirectory": "memories/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
