@@ -77,7 +77,7 @@ export const Map: React.FC<MapProps> = ({
           const currentIdx = popupIndexes[index] || 0;
           return (
             <Marker key={index} position={[marker.position[0], marker.position[1]]} icon={icon}>
-              <Popup>
+              <Popup minWidth={288}>
                 <Testimony
                   marker={marker}
                   currentIdx={currentIdx}

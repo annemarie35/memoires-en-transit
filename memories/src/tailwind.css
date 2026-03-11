@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind utilities;
 @import "tailwindcss";
+
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+  padding: 0 !important;
+}
+.leaflet-popup-content {
+  margin: 0 !important;
+}
