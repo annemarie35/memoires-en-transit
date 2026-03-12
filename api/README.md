@@ -22,14 +22,14 @@ Ces projets n'ont pas été maintenus, ceci est une nouvelle occasion en testant
 - Vitest
 
 ## Démarrage rapide
-
-### 1. Lancer le front (Vite/React)
-
-Dans un autre terminal, placez-vous dans le dossier `memories` puis lancez :
+### 1. Lancer le serveur API (Hapi)
 
 ```bash
 npm install
-npm run dev
+npm run start
 ```
 
-L'application React sera accessible sur [http://localhost:5173](http://localhost:5173) (ou le port affiché par Vite).
+Le serveur Hapi sera accessible sur [http://localhost:3000](http://localhost:3000)
+
+- Route de localisation : [http://localhost:3000/locations](http://localhost:3000/locations)
+
