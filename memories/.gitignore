@@ -26,3 +26,6 @@ dist-ssr
 
 # Raw data
 data
+
+# Test coverage
+coverage/
