@@ -70,7 +70,7 @@ describe('App Component', () => {
   it('renders within a max-width container with padding', async () => {
     render(<App />);
     const container = await screen.findByTestId('app-container');
-    expect(container).toHaveClass('max-w-6xl mx-auto p-8');
+    expect(container).toHaveClass('max-w-6xl', 'mx-auto', 'p-4');
   });
 
   it('renders MapSection with zero markers when no results', async () => {

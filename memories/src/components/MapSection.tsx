@@ -20,11 +20,11 @@ export const MapSection: React.FC<MapSectionProps> = ({
 }) => {
   return (
     <section data-testid='map-section-page' className='w-full'>
-      <div className='flex mb-4 justify-between'>
-        <h1 className='text-3xl font-bold'>Carte des Témoignages</h1>
+      <div className='flex flex-wrap gap-2 mb-4 items-center justify-between'>
+        <h1 className='text-2xl sm:text-3xl font-bold'>Carte des Témoignages</h1>
         <Link
           to='/contribuez'
-          className='text-xl font-bold  text-black rounded hover:bg-yellow-500 transition-colors bg-amber-300 p-2'
+          className='text-base sm:text-xl font-bold text-black rounded hover:bg-yellow-500 transition-colors bg-amber-300 p-2 shrink-0'
         >
           Contribuez !
         </Link>

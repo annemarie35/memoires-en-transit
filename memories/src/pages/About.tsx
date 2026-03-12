@@ -16,7 +16,7 @@ const ExternalLink: React.FC<{ href: string; children: React.ReactNode }> = ({
 
 export const About: React.FC = () => {
   return (
-    <div data-testid='about-page' className='max-w-6xl mx-auto p-8'>
+    <div data-testid='about-page' className='max-w-6xl mx-auto p-4 sm:p-8'>
       <h1 className='text-3xl font-bold mb-8'>À propos</h1>
 
       <div className='space-y-6 text-medium text-gray-800 leading-relaxed'>

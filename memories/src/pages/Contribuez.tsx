@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Contribuez: React.FC = () => {
   return (
-    <div className='max-w-6xl mx-auto p-8 '>
+    <div className='max-w-6xl mx-auto p-4 sm:p-8'>
       <h1 className='text-3xl font-bold mb-8 leading-snug'>
         Appel pour une collecte de témoignages sur le racisme anti-portugais en France
       </h1>

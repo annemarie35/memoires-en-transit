@@ -70,7 +70,7 @@ function App() {
   };
 
   return (
-    <div className='max-w-6xl mx-auto p-8' data-testid='app-container'>
+    <div className='max-w-6xl mx-auto p-4 sm:p-8' data-testid='app-container'>
       {loading && <div className='text-center text-gray-500'>Chargement des marqueurs...</div>}
       {error && (
         <div

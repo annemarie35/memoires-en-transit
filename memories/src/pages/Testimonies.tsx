@@ -42,12 +42,12 @@ export const Testimonies: React.FC = () => {
   }
 
   return (
-    <div data-testid='testimonies-page' className='max-w-6xl mx-auto p-8'>
-      <div className='flex mb-4 justify-between'>
-        <h1 className='text-3xl font-bold'>Témoignages</h1>
+    <div data-testid='testimonies-page' className='max-w-6xl mx-auto p-4 sm:p-8'>
+      <div className='flex flex-wrap gap-2 mb-4 items-center justify-between'>
+        <h1 className='text-2xl sm:text-3xl font-bold'>Témoignages</h1>
         <Link
           to='/contribuez'
-          className='text-xl font-bold text-black rounded hover:bg-yellow-500 transition-colors bg-amber-300 p-2'
+          className='text-base sm:text-xl font-bold text-black rounded hover:bg-yellow-500 transition-colors bg-amber-300 p-2 shrink-0'
         >
           Contribuez !
         </Link>
@@ -131,7 +131,7 @@ export const Testimonies: React.FC = () => {
           </ul>
 
           {pageSize !== 'all' && totalPages > 1 && (
-            <div className='flex items-center justify-center gap-2 mt-8'>
+            <div className='flex items-center justify-center gap-2 mt-8 flex-wrap'>
               <button
                 onClick={() => setPage(1)}
                 disabled={page === 1}
@@ -146,19 +146,25 @@ export const Testimonies: React.FC = () => {
               >
                 Précédent
               </button>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                <button
-                  key={p}
-                  onClick={() => setPage(p)}
-                  className={`px-3 py-1 rounded border text-sm ${
-                    p === page
-                      ? 'bg-amber-300 border-amber-400 font-semibold'
-                      : 'border-gray-300 hover:bg-gray-100'
-                  }`}
-                >
-                  {p}
-                </button>
-              ))}
+              {/* Numéros sur desktop, indicateur compact sur mobile */}
+              <div className='hidden sm:flex gap-2'>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => setPage(p)}
+                    className={`px-3 py-1 rounded border text-sm ${
+                      p === page
+                        ? 'bg-amber-300 border-amber-400 font-semibold'
+                        : 'border-gray-300 hover:bg-gray-100'
+                    }`}
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+              <span className='sm:hidden text-sm text-gray-600 px-2'>
+                {page} / {totalPages}
+              </span>
               <button
                 onClick={() => setPage((p) => p + 1)}
                 disabled={page === totalPages}

@@ -6,12 +6,12 @@ export const Layout: React.FC = () => {
   return (
     <div className='min-h-screen flex flex-col'>
       <header className='w-full bg-white shadow-sm'>
-        <div className='max-w-7xl mx-auto px-6 py-4 flex items-center justify-between'>
-          <div>
-            <h1 className='text-6xl font-bold'>MEMOIRE(S) EN TRANSIT</h1>
-            <p className='text-4xl text-gray-600'>Filiation, exil, identité(s)</p>
+        <div className='max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4'>
+          <div className='min-w-0'>
+            <h1 className='text-2xl sm:text-4xl md:text-6xl font-bold leading-tight'>MEMOIRE(S) EN TRANSIT</h1>
+            <p className='text-base sm:text-2xl md:text-4xl text-gray-600'>Filiation, exil, identité(s)</p>
           </div>
-          <div className='relative'>
+          <div className='relative shrink-0'>
             <Menu />
           </div>
         </div>
