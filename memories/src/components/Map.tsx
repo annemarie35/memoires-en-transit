@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Testimony as TestimonyType } from '../application/get-markers';
-import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Testimony } from './Testimony';
@@ -38,11 +38,29 @@ interface MapProps {
   mapStyle?: MapStyle;
 }
 
-const CENTER_MAP_POSITION: [number, number] = [48.8566, 2.3522];
+const CENTER_MAP_POSITION: [number, number] = [46.5, 2.5];
+
+const MOBILE_BREAKPOINT = 640; // sm
+
+function ResponsiveZoom({ desktopZoom }: { desktopZoom: number }) {
+  const map = useMap();
+
+  useEffect(() => {
+    const update = () => {
+      const zoom = window.innerWidth < MOBILE_BREAKPOINT ? 5 : desktopZoom;
+      map.setView(CENTER_MAP_POSITION, zoom);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [map, desktopZoom]);
+
+  return null;
+}
 
 export const Map: React.FC<MapProps> = ({
   center = CENTER_MAP_POSITION,
-  zoom = 13,
+  zoom = 6,
   markers = [],
   mapStyle = 'streets',
 }) => {
@@ -65,7 +83,7 @@ export const Map: React.FC<MapProps> = ({
   };
 
   return (
-    <div className='h-[1200px] w-full'>
+    <div className='h-[500px] sm:h-[calc(100vh-20rem)] w-full'>
       <MapContainer
         center={center}
         zoom={zoom}
@@ -73,6 +91,7 @@ export const Map: React.FC<MapProps> = ({
         scrollWheelZoom={true}
       >
         <TileLayer url={url} attribution={attribution} />
+        <ResponsiveZoom desktopZoom={zoom} />
 
         {markers.map((marker, index) => {
           const testimonies = marker.testimonies || [];

@@ -30,6 +30,9 @@ vi.mock('react-leaflet', () => ({
   Tooltip: ({ children }: { children: React.ReactNode }) => (
     <div data-testid='map-tooltip'>{children}</div>
   ),
+  useMap: () => ({
+    setView: vi.fn(),
+  }),
 }));
 
 vi.mock('leaflet', () => ({
