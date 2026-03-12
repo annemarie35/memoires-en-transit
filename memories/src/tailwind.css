@@ -12,3 +12,29 @@
 .leaflet-popup-content {
   margin: 0 !important;
 }
+
+.leaflet-popup-close-button {
+  width: 2rem !important;
+  height: 2rem !important;
+  font-size: 1.4rem !important;
+  line-height: 2rem !important;
+  color: white !important;
+  top: 0.25rem !important;
+  right: 0.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+@media (max-width: 639px) {
+  .leaflet-popup {
+    max-width: calc(100vw - 3.5rem) !important;
+  }
+  .leaflet-popup-content-wrapper {
+    max-width: calc(100vw - 3.5rem) !important;
+  }
+  .leaflet-popup-content {
+    max-width: calc(100vw - 3.5rem) !important;
+    overflow-x: hidden !important;
+  }
+}

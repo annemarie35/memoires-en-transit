@@ -101,7 +101,7 @@ export const Map: React.FC<MapProps> = ({
               <Tooltip direction='top' offset={[0, -44]} opacity={1}>
                 {marker.title}
               </Tooltip>
-              <Popup minWidth={384}>
+              <Popup minWidth={Math.min(384, window.innerWidth - 56)}>
                 <Testimony
                   marker={marker}
                   currentIdx={currentIdx}
