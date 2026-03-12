@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { MapSection } from '../MapSection';
 
 vi.mock('../Map', () => ({
@@ -38,12 +39,12 @@ describe('MapSection Component', () => {
   };
 
   it('renders the title correctly', () => {
-    render(<MapSection {...defaultProps} />);
+    render(<MemoryRouter><MapSection {...defaultProps} /></MemoryRouter>);
     expect(screen.getByText('Carte des Témoignages')).toBeInTheDocument();
   });
 
   it('renders the Map component with markers', () => {
-    render(<MapSection {...defaultProps} />);
+    render(<MemoryRouter><MapSection {...defaultProps} /></MemoryRouter>);
     expect(screen.getByTestId('map')).toBeInTheDocument();
     expect(screen.getByText('Paris (1)')).toBeInTheDocument();
     expect(screen.getByText('Lyon (1)')).toBeInTheDocument();
