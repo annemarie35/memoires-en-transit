@@ -1,5 +1,29 @@
 import { describe, it, expect } from 'vitest';
-import { getMarkersGrouped } from '../get-markers';
+import { getMarkersGrouped, getCitiesFromMarkers } from '../get-markers';
+import type { Marker } from '../get-markers';
+
+const marker = (city: string): Marker => ({
+  position: [0, 0],
+  title: `${city} (1)`,
+  city,
+  testimonies: [],
+});
+
+describe('getCitiesFromMarkers', () => {
+  it('returns sorted unique city names', () => {
+    const markers = [marker('Paris'), marker('Lyon'), marker('Bordeaux')];
+    expect(getCitiesFromMarkers(markers)).toEqual(['Bordeaux', 'Lyon', 'Paris']);
+  });
+
+  it('deduplicates cities appearing multiple times', () => {
+    const markers = [marker('Paris'), marker('Lyon'), marker('Paris')];
+    expect(getCitiesFromMarkers(markers)).toEqual(['Lyon', 'Paris']);
+  });
+
+  it('returns an empty array when no markers', () => {
+    expect(getCitiesFromMarkers([])).toEqual([]);
+  });
+});
 
 describe('getMarkersGrouped', () => {
   it('groups testimonies by identical position and counts per city in title', async () => {

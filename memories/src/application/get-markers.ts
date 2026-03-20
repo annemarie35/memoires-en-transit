@@ -12,6 +12,10 @@ export type Marker = {
   testimonies: Testimony[];
 };
 
+export function getCitiesFromMarkers(markers: Marker[]): string[] {
+  return [...new Set(markers.map((m) => m.city))].sort();
+}
+
 export async function getMarkersGrouped(
   temoignages: Array<{ testimonyCity?: string; testimony?: string; [key: string]: any }>
 ): Promise<Marker[]> {

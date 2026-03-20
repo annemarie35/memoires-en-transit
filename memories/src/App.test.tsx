@@ -28,6 +28,7 @@ describe('App Component', () => {
           testimonies: [{ text: 'Un témoignage', genre: 'F', date: '2024-01-01' }],
         },
       ]),
+      getCitiesFromMarkers: vi.fn().mockReturnValue(['Paris']),
     }));
 
     vi.mock('./components/MapSection', () => ({

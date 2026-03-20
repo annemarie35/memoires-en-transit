@@ -1,7 +1,7 @@
 import { MapSection } from './components/MapSection';
 import { useEffect, useState } from 'react';
 import type { Marker } from './application/get-markers.ts';
-import { getMarkersGrouped } from './application/get-markers.ts';
+import { getMarkersGrouped, getCitiesFromMarkers } from './application/get-markers.ts';
 import { getTestimonies } from './infrastructure/get-testimonies.ts';
 import { ExclamationTriangleIcon, CogIcon } from '@heroicons/react/24/solid';
 
@@ -12,7 +12,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [errorType, setErrorType] = useState<'testimonies' | 'markers' | null>(null);
 
-  const cities = allMarkers.map((m) => m.city).sort();
+  const cities = getCitiesFromMarkers(allMarkers);
   const markers = selectedCity ? allMarkers.filter((m) => m.city === selectedCity) : allMarkers;
 
   useEffect(() => {
