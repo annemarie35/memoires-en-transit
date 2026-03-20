@@ -23,8 +23,8 @@ describe('Testimony component', () => {
 
     expect(screen.getByText('Paris (2)')).toBeInTheDocument();
     expect(screen.getByText('Un témoignage')).toBeInTheDocument();
-    expect(screen.getByText('Qui ? Une femme')).toBeInTheDocument();
-    expect(screen.getByText('Quand ? 2024-01-01')).toBeInTheDocument();
+    expect(screen.getByText('Une femme')).toBeInTheDocument();
+    expect(screen.getByText('2024-01-01')).toBeInTheDocument();
   });
 
   it('shows navigation buttons when multiple testimonies and updates on click', () => {
@@ -78,7 +78,7 @@ describe('Testimony component', () => {
     expect(screen.queryByRole('button', { name: 'Suivant' })).toBeNull();
   });
 
-  it('does not render themes (section not implemented)', () => {
+  it('renders themes as badges when provided', () => {
     const testimonies = [
       { text: 'Texte', genre: 'F', date: '2024-01-01', theme: ['emploi', 'papiers'] },
     ];
@@ -93,7 +93,7 @@ describe('Testimony component', () => {
       />
     );
 
-    expect(screen.queryByText('emploi')).toBeNull();
-    expect(screen.queryByText('papiers')).toBeNull();
+    expect(screen.getByText('emploi')).toBeInTheDocument();
+    expect(screen.getByText('papiers')).toBeInTheDocument();
   });
 });

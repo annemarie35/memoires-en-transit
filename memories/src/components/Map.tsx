@@ -39,7 +39,6 @@ interface MapProps {
 }
 
 const CENTER_MAP_POSITION: [number, number] = [46.5, 2.5];
-
 const MOBILE_BREAKPOINT = 640; // sm
 
 function ResponsiveZoom({ desktopZoom }: { desktopZoom: number }) {
