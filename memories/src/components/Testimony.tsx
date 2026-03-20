@@ -24,13 +24,12 @@ export const Testimony: React.FC<TestimonyProps> = ({
 
   return (
     <div className='w-[min(24rem,calc(100vw-3.5rem))] overflow-hidden'>
-      <div className='bg-yellow-600 text-white px-4 py-3 flex justify-between items-start'>
+      <div className='bg-yellow-400 text-black px-4 py-3 flex justify-between items-start'>
         <h3 className='font-bold text-[1.05rem]'>{marker.title}</h3>
       </div>
 
-      {/* Navigation */}
       {testimonies.length > 1 && (
-        <div className='bg-neutral-100 border-t border-neutral-200 flex justify-between items-center px-3 py-2'>
+        <div className='bg-white border-t border-neutral-200 flex justify-between items-center px-3 py-2'>
           <button
             aria-label='Précédent'
             onClick={onPrev}
@@ -77,7 +76,7 @@ export const Testimony: React.FC<TestimonyProps> = ({
                 {testimony.theme.map((t, i) => (
                   <span
                     key={i}
-                    className='text-[0.68rem] px-2 py-0.5 rounded-full font-medium bg-yellow-100 text-neutral-500'
+                    className='text-[0.68rem] px-2 py-0.5 rounded-full font-medium bg-neutral-100 text-neutral-500'
                   >
                     {t}
                   </span>

@@ -13,12 +13,20 @@
   margin: 0 !important;
 }
 
+.leaflet-map-pane {
+  z-index: auto !important;
+}
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 600 !important;
+}
+
 .leaflet-popup-close-button {
   width: 2rem !important;
   height: 2rem !important;
   font-size: 1.4rem !important;
   line-height: 2rem !important;
-  color: white !important;
+  color: black !important;
   top: 0.25rem !important;
   right: 0.25rem !important;
   display: flex !important;
