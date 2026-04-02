@@ -1,5 +1,6 @@
 import Hapi from '@hapi/hapi';
-import { searchLocation } from "./locations";
+import { searchLocation } from "./get-locations";
+import { getTestimonies } from "./get-testimonies";
 
 export async function createServer() {
   const server = Hapi.server({
@@ -12,10 +13,17 @@ export async function createServer() {
 
   server.route({
     method: 'GET',
+    path: '/testimonies',
+    handler: () => getTestimonies(),
+  });
+
+  server.route({
+    method: 'GET',
     path: '/locations',
     handler: async (request, h) => {
       const { q = '', limit = '1', format = 'json' } = request.query;
       const results = await searchLocation(q, limit);
+
       if (format === 'json') {
         return results;
       } else {
