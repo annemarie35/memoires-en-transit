@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeAll } from 'vitest';
 import Hapi from '@hapi/hapi';
 import { createServer } from '../server';
+import { beforeAll, describe, expect, it } from "vitest";
 
 describe('GET /testimonies', () => {
   let server: Hapi.Server;

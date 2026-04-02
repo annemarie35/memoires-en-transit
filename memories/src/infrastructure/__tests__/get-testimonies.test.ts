@@ -1,5 +1,5 @@
-import { vi } from 'vitest';
-import { getTestimonies } from '../get-testimonies.ts';
+import { describe, expect, it, vi } from 'vitest';
+import { getTestimonies } from '../get-testimonies';
 
 global.fetch = vi.fn();
 
