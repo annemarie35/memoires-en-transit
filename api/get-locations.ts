@@ -1,15 +1,18 @@
 interface NominatimResult {
-    place_id: number;
-    licence: string;
-    osm_type: string;
-    osm_id: number;
+    addresstype: string;
     boundingbox: string[];
-    lat: string;
-    lon: string;
-    display_name: string;
     class: string;
-    type: string;
+    display_name: string;
     importance: number;
+    lat: string;
+    licence: string;
+    osm_id: number;
+    osm_type: string;
+    lon: string;
+    name: string;
+    place_id: number;
+    place_rank: number;
+    type: string;
 }
 
 export const searchLocation = async (query: string, limit: string | number = '1'): Promise<NominatimResult[]> => {
