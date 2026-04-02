@@ -2,7 +2,8 @@
 
 ## Description du projet
 
-Application de cartographie des mémoires de l'immigration portugaise en France. Elle permet de visualiser sur une carte interactive des témoignages collectés par l'association Mémoire Vive.
+Application de cartographie des mémoires de l'immigration portugaise en France. 
+Elle permet de visualiser sur une carte interactive des témoignages collectés par l'association Mémoire Vive.
 
 ## Architecture
 
@@ -14,7 +15,6 @@ Le projet est composé de deux parties distinctes :
 - Routes :
   - `GET /locations?q=...` — geocoding via Nominatim (avec cache Redis)
   - `GET /testimonies` — renvoie les témoignages depuis `data/temoignages-enriched.json`
-  - `GET /hello` — route de test
 - Commandes : `npm run start` | `npm run dev` | `npm test`
 
 ### `memories/` — Front React/Vite (TypeScript)
@@ -42,14 +42,6 @@ Les données sources sont dans `api/data/` :
 - Scripts de transformation dans `api/helpers/`
 
 ## Commandes utiles
-
-```bash
-# Démarrer Redis (macOS)
-brew services start redis
-
-# API
-cd api && npm run dev
-
 # Front
 cd memories && npm run dev
 
