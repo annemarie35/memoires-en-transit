@@ -1,8 +1,10 @@
 {
-  "name": "memories",
-  "private": true,
-  "version": "0.0.0",
+  "name": "Mémoire(s) en transit",
+  "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": "^24.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
