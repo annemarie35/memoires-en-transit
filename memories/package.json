@@ -34,7 +34,7 @@
     "@types/csv-parse": "^1.1.12",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "@types/testing-library__jest-dom": "^5.14.9",
+    "@types/testing-library__jest-dom": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",
     "@vitejs/plugin-react": "^4.5.2",
