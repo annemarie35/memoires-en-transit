@@ -9,7 +9,7 @@
     "clean-data": "npx ts-node helpers/clean-data-script.ts"
   },
   "dependencies": {
-    "@hapi/hapi": "^21.4.9",
+    "@hapi/hapi": "^21.4.10",
     "@types/node-fetch": "^2.6.12",
     "csv-parse": "^6.2.1",
     "node-fetch": "^3.3.2"
