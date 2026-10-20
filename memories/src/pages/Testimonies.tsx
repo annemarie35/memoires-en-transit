@@ -1,9 +1,80 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { getTestimonies } from '../infrastructure/get-testimonies';
 import type { Testimony } from '../infrastructure/get-testimonies';
 import { Link } from 'react-router-dom';
 
 const PAGE_SIZE_DEFAULT = 10;
+const COLLAPSE_THRESHOLD = 600;
+
+type DetailKey =
+  | 'genre'
+  | 'birthDate'
+  | 'birthPlace'
+  | 'testimonyDepartment'
+  | 'testimonyConcern'
+  | 'testifyingFor'
+  | 'date';
+
+const DETAILS: Array<{ key: DetailKey; label: string }> = [
+  { key: 'genre', label: 'Qui témoigne' },
+  { key: 'birthDate', label: 'Né·e en' },
+  { key: 'birthPlace', label: 'Lieu de naissance' },
+  { key: 'testimonyDepartment', label: 'Département' },
+  { key: 'testimonyConcern', label: 'Concerné·e' },
+  { key: 'testifyingFor', label: 'Pour qui' },
+  { key: 'date', label: 'Soumis le' },
+];
+
+const TestimonyCard: React.FC<{ item: Testimony }> = ({ item }) => {
+  const [expanded, setExpanded] = useState(false);
+  const isLong = (item.testimony?.length ?? 0) > COLLAPSE_THRESHOLD;
+  const details = DETAILS.filter(({ key }) => item[key]);
+
+  return (
+    <li className='bg-white rounded shadow p-4 sm:p-6'>
+      <div className='text-m font-bold text-gray-600 mb-2'>
+        <span>{item.testimonyCity || 'Ville inconnue'}</span>
+        {' · '}
+        <span>{item.testimonyDate || item.date || 'Date inconnue'}</span>
+      </div>
+      <p
+        className={`text-gray-800 text-base sm:text-lg leading-relaxed whitespace-pre-line ${
+          isLong && !expanded ? 'line-clamp-6' : ''
+        }`}
+      >
+        {item.testimony}
+      </p>
+      {isLong && (
+        <button
+          onClick={() => setExpanded((e) => !e)}
+          aria-expanded={expanded}
+          className='mt-2 text-sm font-semibold text-yellow-900 underline underline-offset-2 hover:text-black'
+        >
+          {expanded ? 'Réduire' : 'Lire la suite'}
+        </button>
+      )}
+      {item.testimonyTheme && (
+        <div className='flex flex-wrap gap-1 mt-4 text-sm'>
+          {item.testimonyTheme.split(',').map((theme, i) => (
+            <span key={i} className='bg-yellow-100 text-gray-700 px-2 py-0.5 rounded-full italic'>
+              {theme.trim()}
+            </span>
+          ))}
+        </div>
+      )}
+      {details.length > 0 && (
+        <dl className='mt-4 pt-3 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-500'>
+          {details.map(({ key, label }) => (
+            <div key={key} className='flex gap-1'>
+              <dt>{label} :</dt>
+              <dd className='text-gray-700'>{item[key]}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </li>
+  );
+};
 
 export const Testimonies: React.FC = () => {
   const [items, setItems] = useState<Testimony[]>([]);
@@ -11,6 +82,7 @@ export const Testimonies: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState<number | 'all'>(PAGE_SIZE_DEFAULT);
+  const listTopRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -36,6 +108,11 @@ export const Testimonies: React.FC = () => {
     pageSize === 'all' ? items : items.slice((page - 1) * pageSize, page * pageSize);
   const totalPages = pageSize === 'all' ? 1 : Math.ceil(items.length / pageSize);
 
+  function goToPage(p: number) {
+    setPage(p);
+    listTopRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+  }
+
   function handlePageSizeChange(value: string) {
     setPageSize(value === 'all' ? 'all' : Number(value));
     setPage(1);
@@ -60,7 +137,7 @@ export const Testimonies: React.FC = () => {
       )}
       {!loading && !error && (
         <>
-          <div className='flex items-center justify-between mb-4'>
+          <div ref={listTopRef} className='flex items-center justify-between mb-4 scroll-mt-4'>
             <div data-testid='count' className='text-sm text-gray-500'>
               {items.length} témoignage(s)
             </div>
@@ -81,66 +158,22 @@ export const Testimonies: React.FC = () => {
           </div>
 
           <ul data-testid='list' className='space-y-4'>
-            {visibleItems.map((item, idx) => (
-              <li key={idx} className='bg-white rounded shadow p-4'>
-                <div className='text-m font-bold text-gray-600 mb-1'>
-                  <span>{item.testimonyCity || 'Ville inconnue'}</span>
-                  {' · '}
-                  <span>{item.testimonyDate || item.date || 'Date inconnue'}</span>
-                </div>
-                <div className='text-gray-800 whitespace-pre-line mb-3'>{item.testimony}</div>
-                <div className='text-sm text-yellow-900 mb-1'>
-                  Témoignage soumis le : {item.date}{' '}
-                </div>
-                <div className='text-sm text-yellow-900 mb-1'>
-                  Département : {item.testimonyDepartment || 'Département inconnu'}{' '}
-                </div>
-                <div className='text-sm text-yellow-900 mb-1'>
-                  Qui témoigne ? : {item.genre || 'Genre inconnu'}{' '}
-                </div>
-                <div className='text-sm text-yellow-900 mb-1'>
-                  Date de naissance ? : {item.birthDate || 'Donnée non renseignée'}{' '}
-                </div>
-                <div className='text-sm text-yellow-900 mb-1'>
-                  Lieu de naissance ? : {item.birthPlace || 'Donnée non renseignée'}{' '}
-                </div>
-                <div className='text-sm text-yellow-900 mb-1'>
-                  Témoignage pour qui ? : {item.testifyingFor || 'Donnée non renseignée'}{' '}
-                </div>
-                <div className='text-sm text-yellow-900 mb-1'>
-                  Qui est concerné ? : {item.testimonyConcern || 'Donnée non renseignée'}{' '}
-                </div>
-                <div className='text-sm text-gray-600 py-1'>
-                  {item.testimonyTheme ? (
-                    <div className='flex flex-wrap gap-1 mt-1'>
-                      {item.testimonyTheme.split(',').map((theme, i) => (
-                        <span
-                          key={i}
-                          className='bg-yellow-100 text-gray-700 px-2 py-0.5 rounded-full italic'
-                        >
-                          {theme.trim()}
-                        </span>
-                      ))}
-                    </div>
-                  ) : (
-                    <span className='italic'>Thème inconnu</span>
-                  )}
-                </div>
-              </li>
+            {visibleItems.map((item) => (
+              <TestimonyCard key={item.id} item={item} />
             ))}
           </ul>
 
           {pageSize !== 'all' && totalPages > 1 && (
             <div className='flex items-center justify-center gap-2 mt-8 flex-wrap'>
               <button
-                onClick={() => setPage(1)}
+                onClick={() => goToPage(1)}
                 disabled={page === 1}
                 className='px-2 py-1 rounded border border-gray-300 text-sm disabled:opacity-40 hover:bg-gray-100'
               >
                 «
               </button>
               <button
-                onClick={() => setPage((p) => p - 1)}
+                onClick={() => goToPage(page - 1)}
                 disabled={page === 1}
                 className='px-3 py-1 rounded border border-gray-300 text-sm disabled:opacity-40 hover:bg-gray-100'
               >
@@ -151,7 +184,7 @@ export const Testimonies: React.FC = () => {
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                   <button
                     key={p}
-                    onClick={() => setPage(p)}
+                    onClick={() => goToPage(p)}
                     className={`px-3 py-1 rounded border text-sm ${
                       p === page
                         ? 'bg-amber-300 border-amber-400 font-semibold'
@@ -166,14 +199,14 @@ export const Testimonies: React.FC = () => {
                 {page} / {totalPages}
               </span>
               <button
-                onClick={() => setPage((p) => p + 1)}
+                onClick={() => goToPage(page + 1)}
                 disabled={page === totalPages}
                 className='px-3 py-1 rounded border border-gray-300 text-sm disabled:opacity-40 hover:bg-gray-100'
               >
                 Suivant
               </button>
               <button
-                onClick={() => setPage(totalPages)}
+                onClick={() => goToPage(totalPages)}
                 disabled={page === totalPages}
                 className='px-2 py-1 rounded border border-gray-300 text-sm disabled:opacity-40 hover:bg-gray-100'
               >
