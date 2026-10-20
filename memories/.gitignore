@@ -29,3 +29,7 @@ data
 
 # Test coverage
 coverage/
+# Environment variables
+.env
+.env.*
+!.env.example

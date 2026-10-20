@@ -95,14 +95,14 @@ describe('Map Component', () => {
   describe('Map Styles', () => {
     const mapStyles: { [key in MapStyle]: { url: string } } = {
       streets: {
-        url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+        url: 'https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png?key=',
       },
     };
 
-    it('uses streets style by default', () => {
+    it('uses CARTO streets style by default outside production', () => {
       render(<Map />);
       const tileLayer = screen.getByTestId('tile-layer');
-      expect(tileLayer.getAttribute('data-url')).toBe(mapStyles.streets.url);
+      expect(tileLayer.getAttribute('data-url')?.startsWith(mapStyles.streets.url)).toBe(true);
     });
   });
 });
