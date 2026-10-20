@@ -29,7 +29,12 @@ Dans un autre terminal, placez-vous dans le dossier `memories` puis lancez :
 
 ```bash
 npm install
+cp .env.example .env   # puis renseignez CARTO_API_KEY
 npm run dev
 ```
+
+Le fond de carte utilise les tuiles CARTO, qui nécessitent une clé API depuis septembre 2026 (sans clé, la carte affiche « API KEY REQUIRED »).
+Une clé gratuite peut être obtenue sur [carto.com/basemaps/apikey](https://carto.com/basemaps/apikey), sans compte CARTO.
+Cette clé est intégrée au code envoyé au navigateur : elle est donc visible publiquement.
 
 L'application React sera accessible sur [http://localhost:5173](http://localhost:5173) (ou le port affiché par Vite).
