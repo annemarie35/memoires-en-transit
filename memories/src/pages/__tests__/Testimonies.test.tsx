@@ -58,6 +58,35 @@ describe('Testimonies Page', () => {
     expect(screen.getByTestId('error')).toHaveTextContent('Impossible de charger les témoignages');
   });
 
+  it('only shows details that are filled in', async () => {
+    renderPage();
+    await waitForList();
+    expect(screen.getByText('Qui témoigne :')).toBeInTheDocument();
+    expect(screen.queryByText('Pour qui :')).not.toBeInTheDocument();
+    expect(screen.queryByText(/Donnée non renseignée/)).not.toBeInTheDocument();
+  });
+
+  it('collapses long testimonies behind a "Lire la suite" toggle', async () => {
+    (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockResolvedValue([
+      { ...makeTestimony(1), testimony: 'a'.repeat(700) },
+    ]);
+    renderPage();
+    await waitForList();
+    const toggle = screen.getByRole('button', { name: 'Lire la suite' });
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    fireEvent.click(toggle);
+    expect(screen.getByRole('button', { name: 'Réduire' })).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+  });
+
+  it('does not show the toggle for short testimonies', async () => {
+    renderPage();
+    await waitForList();
+    expect(screen.queryByRole('button', { name: 'Lire la suite' })).not.toBeInTheDocument();
+  });
+
   describe('pagination', () => {
     beforeEach(() => {
       (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockResolvedValue(TWELVE);
@@ -84,6 +113,15 @@ describe('Testimonies Page', () => {
       expect(screen.getByText('Texte 11')).toBeInTheDocument();
       expect(screen.getByText('Texte 12')).toBeInTheDocument();
       expect(screen.queryByText('Texte 1')).not.toBeInTheDocument();
+    });
+
+    it('scrolls back to the top of the list when changing page', async () => {
+      const scrollIntoView = vi.fn();
+      Element.prototype.scrollIntoView = scrollIntoView;
+      renderPage();
+      await waitForList();
+      fireEvent.click(screen.getByText('Suivant'));
+      expect(scrollIntoView).toHaveBeenCalled();
     });
 
     it('navigates back to previous page on Précédent click', async () => {

@@ -13,6 +13,7 @@ export async function getTestimonies(): Promise<Testimony[] | []> {
 }
 
 export type Testimony = {
+  id: number;
   date: string;
   genre: string;
   birthPlace: string;
