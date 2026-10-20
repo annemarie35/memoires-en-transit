@@ -99,7 +99,7 @@ describe('Map Component', () => {
       },
     };
 
-    it('uses streets style by default', () => {
+    it('uses CARTO streets style by default outside production', () => {
       render(<Map />);
       const tileLayer = screen.getByTestId('tile-layer');
       expect(tileLayer.getAttribute('data-url')?.startsWith(mapStyles.streets.url)).toBe(true);
