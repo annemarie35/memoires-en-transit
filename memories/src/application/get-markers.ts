@@ -1,3 +1,5 @@
+import type { Testimony as TestimonyRecord } from '../infrastructure/get-testimonies';
+
 export type Testimony = {
   text: string;
   genre?: string;
@@ -17,7 +19,7 @@ export function getCitiesFromMarkers(markers: Marker[]): string[] {
 }
 
 export async function getMarkersGrouped(
-  temoignages: Array<{ testimonyCity?: string; testimony?: string; [key: string]: any }>
+  temoignages: Array<Partial<TestimonyRecord>>
 ): Promise<Marker[]> {
   const positionMap: Record<
     string,

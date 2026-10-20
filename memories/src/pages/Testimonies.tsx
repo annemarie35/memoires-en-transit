@@ -14,7 +14,6 @@ export const Testimonies: React.FC = () => {
 
   useEffect(() => {
     let isMounted = true;
-    setLoading(true);
     getTestimonies()
       .then((data) => {
         if (!isMounted) return;

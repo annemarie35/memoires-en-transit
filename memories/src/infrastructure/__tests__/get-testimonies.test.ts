@@ -22,10 +22,10 @@ describe('getTestimonies (API)', () => {
         testimonyLocation: [48.8566, 2.3522],
       },
     ];
-    (fetch as any).mockResolvedValueOnce({
+    vi.mocked(fetch).mockResolvedValueOnce({
       ok: true,
       json: async () => mockData,
-    });
+    } as Response);
 
     const result = await getTestimonies();
     expect(result).toEqual(mockData);

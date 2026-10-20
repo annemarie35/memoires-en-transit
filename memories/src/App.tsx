@@ -17,9 +17,6 @@ function App() {
 
   useEffect(() => {
     let isMounted = true;
-    setLoading(true);
-    setError(null);
-    setErrorType(null);
 
     (async () => {
       try {

@@ -70,7 +70,7 @@ describe('getMarkersGrouped', () => {
       },
     ];
 
-    const result = await getMarkersGrouped(input as any);
+    const result = await getMarkersGrouped(input);
     expect(result).toHaveLength(0);
   });
 
@@ -85,7 +85,7 @@ describe('getMarkersGrouped', () => {
       },
     ];
 
-    const result = await getMarkersGrouped(input as any);
+    const result = await getMarkersGrouped(input);
     expect(result).toHaveLength(1);
     expect(result[0].testimonies[0].theme).toEqual(['aucun thème fourni']);
   });
