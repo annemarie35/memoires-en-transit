@@ -39,12 +39,20 @@ describe('MapSection Component', () => {
   };
 
   it('renders the title correctly', () => {
-    render(<MemoryRouter><MapSection {...defaultProps} /></MemoryRouter>);
+    render(
+      <MemoryRouter>
+        <MapSection {...defaultProps} />
+      </MemoryRouter>
+    );
     expect(screen.getByText('Carte des Témoignages')).toBeInTheDocument();
   });
 
   it('renders the Map component with markers', () => {
-    render(<MemoryRouter><MapSection {...defaultProps} /></MemoryRouter>);
+    render(
+      <MemoryRouter>
+        <MapSection {...defaultProps} />
+      </MemoryRouter>
+    );
     expect(screen.getByTestId('map')).toBeInTheDocument();
     expect(screen.getByText('Paris (1)')).toBeInTheDocument();
     expect(screen.getByText('Lyon (1)')).toBeInTheDocument();

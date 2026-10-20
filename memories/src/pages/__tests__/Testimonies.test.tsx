@@ -26,7 +26,12 @@ vi.mock('../../infrastructure/get-testimonies', () => ({
   getTestimonies: vi.fn(),
 }));
 
-const renderPage = () => render(<MemoryRouter><Testimonies /></MemoryRouter>);
+const renderPage = () =>
+  render(
+    <MemoryRouter>
+      <Testimonies />
+    </MemoryRouter>
+  );
 const waitForList = () => waitFor(() => expect(screen.getByTestId('list')).toBeInTheDocument());
 
 describe('Testimonies Page', () => {

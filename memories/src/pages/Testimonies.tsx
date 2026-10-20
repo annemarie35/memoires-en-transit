@@ -32,7 +32,8 @@ export const Testimonies: React.FC = () => {
     };
   }, []);
 
-  const visibleItems = pageSize === 'all' ? items : items.slice((page - 1) * pageSize, page * pageSize);
+  const visibleItems =
+    pageSize === 'all' ? items : items.slice((page - 1) * pageSize, page * pageSize);
   const totalPages = pageSize === 'all' ? 1 : Math.ceil(items.length / pageSize);
 
   function handlePageSizeChange(value: string) {

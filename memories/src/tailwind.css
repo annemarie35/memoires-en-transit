@@ -1,8 +1,7 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @tailwind base;
 @tailwind utilities;
-
 
 .leaflet-popup-content-wrapper {
   border-radius: 10px !important;

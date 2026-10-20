@@ -29,5 +29,5 @@ export type Testimony = {
 };
 
 type Location = [latitude, longitude];
-type latitude = number
-type longitude = number
+type latitude = number;
+type longitude = number;
