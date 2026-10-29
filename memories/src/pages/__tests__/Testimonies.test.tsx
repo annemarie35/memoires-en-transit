@@ -58,6 +58,57 @@ describe('Testimonies Page', () => {
     expect(screen.getByTestId('error')).toHaveTextContent('Impossible de charger les témoignages');
   });
 
+  it('only shows details that are filled in', async () => {
+    renderPage();
+    await waitForList();
+    expect(screen.getByText('Qui témoigne :')).toBeInTheDocument();
+    expect(screen.queryByText('Pour qui :')).not.toBeInTheDocument();
+    expect(screen.queryByText(/Donnée non renseignée/)).not.toBeInTheDocument();
+  });
+
+  it('collapses long testimonies behind a "Lire la suite" toggle', async () => {
+    (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockResolvedValue([
+      { ...makeTestimony(1), testimony: 'a'.repeat(700) },
+    ]);
+    renderPage();
+    await waitForList();
+    const toggle = screen.getByRole('button', { name: 'Lire la suite' });
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    fireEvent.click(toggle);
+    expect(screen.getByRole('button', { name: 'Réduire' })).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+  });
+
+  it('does not show the toggle for short testimonies', async () => {
+    renderPage();
+    await waitForList();
+    expect(screen.queryByRole('button', { name: 'Lire la suite' })).not.toBeInTheDocument();
+  });
+
+  it('filters testimonies by theme', async () => {
+    (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockResolvedValue([
+      {
+        ...makeTestimony(1),
+        testimonyTheme: "les préjugés, les clichés ou stéréotypes sur les portugais, l'accent",
+      },
+      { ...makeTestimony(2), testimonyTheme: 'les papiers d’identité' },
+    ]);
+    renderPage();
+    await waitForList();
+    fireEvent.click(screen.getByRole('button', { name: 'préjugés et clichés' }));
+    expect(screen.getByRole('button', { name: 'préjugés et clichés' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    expect(screen.getByText('Texte 1')).toBeInTheDocument();
+    expect(screen.queryByText('Texte 2')).not.toBeInTheDocument();
+    expect(screen.getByTestId('count')).toHaveTextContent('1 témoignage(s) pour ce thème');
+    fireEvent.click(screen.getByRole('button', { name: 'Tous' }));
+    expect(screen.getByText('Texte 2')).toBeInTheDocument();
+  });
+
   describe('pagination', () => {
     beforeEach(() => {
       (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockResolvedValue(TWELVE);
@@ -84,6 +135,15 @@ describe('Testimonies Page', () => {
       expect(screen.getByText('Texte 11')).toBeInTheDocument();
       expect(screen.getByText('Texte 12')).toBeInTheDocument();
       expect(screen.queryByText('Texte 1')).not.toBeInTheDocument();
+    });
+
+    it('scrolls back to the top of the list when changing page', async () => {
+      const scrollIntoView = vi.fn();
+      Element.prototype.scrollIntoView = scrollIntoView;
+      renderPage();
+      await waitForList();
+      fireEvent.click(screen.getByText('Suivant'));
+      expect(scrollIntoView).toHaveBeenCalled();
     });
 
     it('navigates back to previous page on Précédent click', async () => {
