@@ -87,6 +87,28 @@ describe('Testimonies Page', () => {
     expect(screen.queryByRole('button', { name: 'Lire la suite' })).not.toBeInTheDocument();
   });
 
+  it('filters testimonies by theme', async () => {
+    (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockResolvedValue([
+      {
+        ...makeTestimony(1),
+        testimonyTheme: "les préjugés, les clichés ou stéréotypes sur les portugais, l'accent",
+      },
+      { ...makeTestimony(2), testimonyTheme: 'les papiers d’identité' },
+    ]);
+    renderPage();
+    await waitForList();
+    fireEvent.click(screen.getByRole('button', { name: 'préjugés et clichés' }));
+    expect(screen.getByRole('button', { name: 'préjugés et clichés' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    expect(screen.getByText('Texte 1')).toBeInTheDocument();
+    expect(screen.queryByText('Texte 2')).not.toBeInTheDocument();
+    expect(screen.getByTestId('count')).toHaveTextContent('1 témoignage(s) pour ce thème');
+    fireEvent.click(screen.getByRole('button', { name: 'Tous' }));
+    expect(screen.getByText('Texte 2')).toBeInTheDocument();
+  });
+
   describe('pagination', () => {
     beforeEach(() => {
       (getTestimonies as unknown as ReturnType<typeof vi.fn>).mockResolvedValue(TWELVE);
