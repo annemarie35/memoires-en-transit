@@ -1,4 +1,5 @@
 import type { Testimony as TestimonyRecord } from '../infrastructure/get-testimonies';
+import { splitThemes } from './themes';
 
 export type Testimony = {
   text: string;
@@ -40,7 +41,7 @@ export async function getMarkersGrouped(
         genre: temoignage.genre,
         date: temoignage.testimonyDate,
         theme: temoignage.testimonyTheme
-          ? temoignage.testimonyTheme.split(',')
+          ? splitThemes(temoignage.testimonyTheme)
           : ['aucun thème fourni'],
       });
     }

@@ -10,9 +10,10 @@
 }
 
 .leaflet-popup-content-wrapper {
-  border-radius: 10px !important;
+  border-radius: 0.75rem !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
   padding: 0 !important;
+  overflow: hidden;
 }
 .leaflet-popup-content {
   margin: 0 !important;
@@ -31,8 +32,8 @@
   height: 2rem !important;
   font-size: 1.4rem !important;
   line-height: 2rem !important;
-  color: black !important;
-  top: 0.25rem !important;
+  color: var(--color-navy) !important;
+  top: 0.5rem !important;
   right: 0.25rem !important;
   display: flex !important;
   align-items: center !important;
