@@ -6,11 +6,10 @@ Un projet a été lancé par l'association Mémoire Vive en 2020 [Appel pour une
 
 Les témoignages utilisés ici proviennent de cette récolte.
 
-Ressources :
 
-- https://www.memoria-viva.fr/category/les-projets/les-deserteurs-des-guerres-coloniales-portugaises-1961-1975/
-- http://www.sudexpress.org/
-- https://ecosexilios-cria.org/fr/
+![copie-ecran.png](copie-ecran.png)
+
+
 
 ## Stack technique
 
@@ -40,3 +39,9 @@ Une clé gratuite peut être obtenue sur [carto.com/basemaps/apikey](https://car
 
 En production, la carte utilise les tuiles [OpenStreetMap](https://tile.openstreetmap.org)
 
+
+## Ressources
+
+- https://www.memoria-viva.fr/category/les-projets/les-deserteurs-des-guerres-coloniales-portugaises-1961-1975/
+- http://www.sudexpress.org/
+- https://ecosexilios-cria.org/fr/
